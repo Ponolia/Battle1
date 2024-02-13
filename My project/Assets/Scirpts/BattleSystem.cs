@@ -33,10 +33,13 @@ public class BattleSystem : PlayerMove, IDamage, ILive
     }
     public void OnAttack()
     {
-        IDamage damage = myTarget.GetComponent<IDamage>();
-        if (damage != null) damage.OnDamage(battleStat.AttackPoint);
+        if (IsLive)
+        {
+            IDamage damage = myTarget.GetComponent<IDamage>();
+            if (damage != null) damage.OnDamage(battleStat.AttackPoint);
+        }
     }
-    public void OnDamage(float dmg)
+    public virtual void OnDamage(float dmg)
     {
         curHP -= dmg;
         if (curHP > 0.0f)
@@ -44,14 +47,5 @@ public class BattleSystem : PlayerMove, IDamage, ILive
             myAnim.SetTrigger("Hit");
             // StartCoroutine(DamagingEff(0.3f));
         }
-        else
-        {
-            OnDead();
-            myAnim.SetTrigger("Die");
-        }
-    }
-    protected virtual void OnDead()
-    {
-
-    }
+    } 
 }

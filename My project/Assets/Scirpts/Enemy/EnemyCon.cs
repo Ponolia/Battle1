@@ -6,7 +6,7 @@ public class EnemyCon : AIMoveMent
 {
     public enum State
     {
-        Create, Normal, Roaming, Battle
+        Create, Normal, Roaming, Battle, Dead
     }
     public State myState = State.Create;
    
@@ -37,6 +37,12 @@ public class EnemyCon : AIMoveMent
             case State.Battle:
                 AttackTarget(myPerception.myTarget);
                 break;
+            case State.Dead:
+                myPerception.enabled = false;
+                StopAllCoroutines();
+                myAnim.SetTrigger("Die");
+                gameObject.SetActive(false);
+                break;
         }
     }
     IEnumerator Waiting(float t)
@@ -58,6 +64,7 @@ public class EnemyCon : AIMoveMent
 
     void Start()
     {
+        curHP = battleStat.MaxHpPoint;
         startPos = transform.position; // 스타트 지점 저장
         ChangeState(State.Normal);
     }
@@ -72,7 +79,14 @@ public class EnemyCon : AIMoveMent
     public void LostEnemy()
     {
         myTarget = myPerception.myTarget;
-        ChangeState(State.Battle);
+        ChangeState(State.Normal);
     }
-  
+    public override void OnDamage(float dmg)
+    {
+        base.OnDamage(dmg);
+        if (!IsLive)
+        {
+            ChangeState(State.Dead);
+        }
+    }
 }

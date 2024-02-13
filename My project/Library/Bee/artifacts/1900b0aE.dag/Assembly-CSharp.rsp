@@ -387,10 +387,13 @@
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2023.2.6f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.UIToolkit.SourceGenerator.dll"
 "Assets/Scirpts/AIMoveMent.cs"
 "Assets/Scirpts/AIPerception.cs"
+"Assets/Scirpts/AnimEvent.cs"
+"Assets/Scirpts/BattleSystem.cs"
 "Assets/Scirpts/CharProperty.cs"
 "Assets/Scirpts/Enemy/EnemyCon.cs"
 "Assets/Scirpts/Enemy/Monster.cs"
 "Assets/Scirpts/Player/Picking.cs"
+"Assets/Scirpts/Player/PlayerCon.cs"
 "Assets/Scirpts/Player/PlayerMove.cs"
 -langversion:9.0
 

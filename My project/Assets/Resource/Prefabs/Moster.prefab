@@ -111,7 +111,6 @@ GameObject:
   - component: {fileID: 7500995954289985217}
   - component: {fileID: 3224034128548623602}
   - component: {fileID: 6951026053972950367}
-  - component: {fileID: 8063540523176877448}
   - component: {fileID: 4322253458524409787}
   m_Layer: 7
   m_Name: Moster
@@ -185,27 +184,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &8063540523176877448
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5768304482078631261}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c65548cba5c9f24caa25c66bb1e2986, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  battleStat:
-    MaxHpPoint: 0
-    AttackPoint: 0
-    AttackRange: 0
-    AttackDelay: 0
-  moveSpeed: 1
-  rotSpeed: 360
-  myState: 0
-  IsRoaming: 0
 --- !u!114 &4322253458524409787
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,6 +201,7 @@ MonoBehaviour:
     AttackPoint: 10
     AttackRange: 1
     AttackDelay: 2
+  myHpBar: {fileID: 0}
   moveSpeed: 1
   rotSpeed: 360
   myState: 0
