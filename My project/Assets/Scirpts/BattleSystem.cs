@@ -24,6 +24,10 @@ public struct BattleStat
 public class BattleSystem : PlayerMove, IDamage, ILive
 {
     protected Transform myTarget = null;
+    protected void Initialize()
+    {
+        curHP = battleStat.MaxHpPoint;
+    }
     public bool IsLive
     {
         get
@@ -31,13 +35,18 @@ public class BattleSystem : PlayerMove, IDamage, ILive
             return curHP > 0.0f;
         }
     }
-    public void OnAttack()
+    public void OnAttack(Vector3 pos, float size, LayerMask enemyMask,float dmg) 
     {
-        if (IsLive)
+
+        Collider[] myCols = Physics.OverlapSphere(pos, size, enemyMask);
+        foreach (Collider col in myCols)
         {
-            IDamage damage = myTarget.GetComponent<IDamage>();
-            if (damage != null) damage.OnDamage(battleStat.AttackPoint);
+            IDamage damage = col.GetComponent<IDamage>();
+            Vector3 attackVec = col.transform.position - pos;
+            attackVec.Normalize();
+            if (damage != null) damage.OnDamage(dmg);
         }
+
     }
     public virtual void OnDamage(float dmg)
     {
@@ -45,7 +54,16 @@ public class BattleSystem : PlayerMove, IDamage, ILive
         if (curHP > 0.0f)
         {
             myAnim.SetTrigger("Hit");
-            // StartCoroutine(DamagingEff(0.3f));
+           
+        }
+        else
+        {
+            OnDead();
+            myAnim.SetTrigger("Die");
         }
     } 
+    protected virtual void OnDead()
+    {
+
+    }
 }

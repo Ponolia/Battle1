@@ -3,38 +3,42 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PlayerCon : BattleSystem
+public class PlayerCon : PlayerBattleSystem
 {
-    
+    public Transform myWeaponPos;
     // Start is called before the first frame update
     void Start()
     {
-        curHP = battleStat.MaxHpPoint;
+        Initialize();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(KeyCode.Q) && !myAnim.GetBool("IsAttack"))
         {
-            myAnim.SetTrigger("Attack");
+            myAnim.SetTrigger("Skill1");
         }
-        
-    }
-    public void ComboCeckStart()
-    {
+        if (Input.GetKeyDown(KeyCode.W) && !myAnim.GetBool("IsAttack"))
+        {
+            myAnim.SetTrigger("Skill2");
+        }
+        if (Input.GetKeyDown(KeyCode.E) && !myAnim.GetBool("IsAttack"))
+        {
+            myAnim.SetTrigger("Skill3");
+        }
+        if (Input.GetKeyDown(KeyCode.R) && !myAnim.GetBool("IsAttack"))
+        {
 
+        }
     }
    public void SetTarget(Transform target)
     {
         myTarget = target;
         AttackTarget(myTarget);
     }
-    public void Dead()
+    protected override void OnDead()
     {
-        if (curHP <= 0.0f)
-        {
-            myAnim.SetTrigger("Die");
-        }
+        
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyCon : AIMoveMent
 {
@@ -9,10 +10,10 @@ public class EnemyCon : AIMoveMent
         Create, Normal, Roaming, Battle, Dead
     }
     public State myState = State.Create;
-   
-    public bool IsRoaming;
 
     Vector3 startPos = Vector3.zero;
+    public Transform barPoint = null;
+    GameObject hpBarObj = null;
     void ChangeState(State s)
     {
         if (myState == s) return;
@@ -20,19 +21,16 @@ public class EnemyCon : AIMoveMent
         switch (myState)
         {
             case State.Normal:
-                //if (IsRoaming)
-                //{
+               
                     Vector3 rndDir = Vector3.forward;
                     Quaternion rndRot = Quaternion.Euler(0, Random.Range(0.0f, 360.0f), 0);
                     float dist = Random.Range(0.0f, 5.0f);
                     rndDir = rndRot * rndDir * dist;
                     Vector3 rndPos = startPos + rndDir;
 
-                    MovetoPos(rndPos, ()=> StartCoroutine(Waiting(Random.Range(1.0f,3.0f))));
+                    MovetoPos(rndPos, () => StartCoroutine(Waiting(Random.Range(1.0f, 3.0f))));
                     ChangeState(State.Roaming);
-              //  }
-                break;
-            case State.Roaming:
+                
                 break;
             case State.Battle:
                 AttackTarget(myPerception.myTarget);
@@ -40,7 +38,6 @@ public class EnemyCon : AIMoveMent
             case State.Dead:
                 myPerception.enabled = false;
                 StopAllCoroutines();
-                myAnim.SetTrigger("Die");
                 gameObject.SetActive(false);
                 break;
         }
@@ -62,11 +59,20 @@ public class EnemyCon : AIMoveMent
         }
     }
 
-    void Start()
+    private void Awake()
     {
-        curHP = battleStat.MaxHpPoint;
         startPos = transform.position; // 스타트 지점 저장
+
         ChangeState(State.Normal);
+    }
+   
+    private void OnEnable()
+    {
+        Initialize();
+        hpBarObj = Instantiate(Resources.Load("UI\\EnemyHPBar") as GameObject,
+          GameObject.Find("Canvas").transform.GetChild(0));
+        myHpBar = hpBarObj.GetComponent<Slider>();
+        hpBarObj.GetComponent<EnemyHPBar>().SetTarget(transform);
     }
     void Update()
     {
@@ -88,5 +94,27 @@ public class EnemyCon : AIMoveMent
         {
             ChangeState(State.Dead);
         }
+    }
+    protected override void OnDead()
+    {
+        ChangeState(State.Dead);
+    }
+    public void DisAppear()
+    {
+        Destroy(hpBarObj);
+        StartCoroutine(DisAppearing(0.5f, 2.0f));
+    }
+    IEnumerator DisAppearing(float speed,float t)
+    {
+        yield return new WaitForSeconds(t);
+        float dist = 2.0f;
+        while (dist > 0.0f)
+        {
+            float delta = speed * Time.deltaTime;
+            dist -= delta;
+            transform.Translate(Vector3.down * delta, Space.World);
+            yield return null;
+        }
+        Destroy(gameObject);
     }
 }

@@ -6,8 +6,6 @@ using UnityEngine.Events;
 public class AnimEvent : MonoBehaviour
 {
     public UnityEvent AttackAct;
-    public UnityEvent ComboStart;
-    public UnityEvent ComboEnd;
     public UnityEvent DeadAct;
     public UnityEvent SkillAct;
 
@@ -15,7 +13,6 @@ public class AnimEvent : MonoBehaviour
     {
         
     }
-
     
     void Update()
     {
@@ -24,14 +21,6 @@ public class AnimEvent : MonoBehaviour
     public void OnAttack()
     {
         AttackAct?.Invoke();
-    }
-    public void ComboCeckStart()
-    {
-        ComboStart?.Invoke();
-    }
-    public void ComboCeckEnd()
-    {
-        ComboEnd?.Invoke();
     }
     public void OnDead()
     {

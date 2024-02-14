@@ -31,12 +31,15 @@ public class PlayerMove : CharProperty
         StartCoroutine(Rotating(dir));
         while (dist > 0.0f)
         {
-            float delta = moveSpeed * Time.deltaTime;
+            if (!myAnim.GetBool("IsAttack"))
+            {
+                float delta = moveSpeed * Time.deltaTime;
 
-            if (delta > dist) delta = dist;
-            dist -= delta;
+                if (delta > dist) delta = dist;
+                dist -= delta;
 
-            transform.Translate(dir * delta, Space.World);
+                transform.Translate(dir * delta, Space.World);
+            }
             yield return null;
         }
         myAnim.SetBool("IsMove", false);
@@ -52,10 +55,13 @@ public class PlayerMove : CharProperty
         }
         while (!Mathf.Approximately(angle, 0.0f))
         {
-            float delta = rotSpeed * Time.deltaTime;
-            if (delta > angle) delta = angle;
-            angle -= delta;
-            transform.Rotate(Vector3.up * delta * rotDir);
+            if (!myAnim.GetBool("IsAttack"))
+            {
+                float delta = rotSpeed * Time.deltaTime;
+                if (delta > angle) delta = angle;
+                angle -= delta;
+                transform.Rotate(Vector3.up * delta * rotDir);
+            }
             yield return null;
         } 
     }
@@ -66,12 +72,14 @@ public class PlayerMove : CharProperty
     }
     IEnumerator Attacking(Transform target)
     {
+        ILive live = target.GetComponent<ILive>();
         while (target!= null)
         {
+            if (live != null && !live.IsLive) break;
             playTime += Time.deltaTime;
             Vector3 dir = target.position - transform.position;
             float dist = dir.magnitude - battleStat.AttackRange;
-            if (dist < 0.0f) dist = 0.0f;
+            if (dist < 0.1f) dist = 0.0f;
             dir.Normalize();
 
             float delta = moveSpeed * Time.deltaTime;
@@ -80,8 +88,10 @@ public class PlayerMove : CharProperty
                 myAnim.SetBool("IsMove", true);
                
                 if (delta > dist) delta = dist;
-
-                transform.Translate(dir * delta, Space.World);
+                if (!myAnim.GetBool("IsAttack"))
+                {
+                    transform.Translate(dir * delta, Space.World);
+                }
             }
             else
             {
