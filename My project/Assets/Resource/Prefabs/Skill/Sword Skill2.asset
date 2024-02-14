@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sword Skill2
   m_EditorClassIdentifier: 
   Icon: {fileID: 0}
-  animationClip: {fileID: 0}
+  animationClip: {fileID: 7400000, guid: 877999ccb638b6c488cb9608ac64cd10, type: 2}
   EffectPrefab: {fileID: 0}
   IsAreaSelect: 0
   AreaPrefab: {fileID: 0}

@@ -41,4 +41,9 @@ public class PlayerCon : PlayerBattleSystem
     {
         
     }
+    public void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position,battleStat.AttackRange);
+    }
 }

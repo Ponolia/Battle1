@@ -69,10 +69,12 @@ public class EnemyCon : AIMoveMent
     private void OnEnable()
     {
         Initialize();
+        /*
         hpBarObj = Instantiate(Resources.Load("UI\\EnemyHPBar") as GameObject,
           GameObject.Find("Canvas").transform.GetChild(0));
         myHpBar = hpBarObj.GetComponent<Slider>();
         hpBarObj.GetComponent<EnemyHPBar>().SetTarget(transform);
+        */
     }
     void Update()
     {

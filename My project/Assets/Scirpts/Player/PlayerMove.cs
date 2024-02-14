@@ -8,6 +8,7 @@ public class PlayerMove : CharProperty
 {
     public float moveSpeed = 1.0f;
     public float rotSpeed = 360.0f;
+    
     private void Update()
     {
         
@@ -29,7 +30,7 @@ public class PlayerMove : CharProperty
         dir.Normalize();
 
         StartCoroutine(Rotating(dir));
-        while (dist > 0.0f)
+        while (dist > 0.1f)
         {
             if (!myAnim.GetBool("IsAttack"))
             {
@@ -79,14 +80,14 @@ public class PlayerMove : CharProperty
             playTime += Time.deltaTime;
             Vector3 dir = target.position - transform.position;
             float dist = dir.magnitude - battleStat.AttackRange;
-            if (dist < 0.1f) dist = 0.0f;
+            if (dist < 0.2f) dist = 0.0f;
             dir.Normalize();
 
+            myAnim.SetBool("IsMove", false);
             float delta = moveSpeed * Time.deltaTime;
             if (!Mathf.Approximately( dist, 0.0f))
             {
-                myAnim.SetBool("IsMove", true);
-               
+                myAnim.SetBool("IsMove", true);               
                 if (delta > dist) delta = dist;
                 if (!myAnim.GetBool("IsAttack"))
                 {
@@ -95,12 +96,13 @@ public class PlayerMove : CharProperty
             }
             else
             {
-                myAnim.SetBool("IsMove", false);
+                
                 if (playTime >= battleStat.AttackDelay)
                 {
                     playTime = 0.0f;
                     myAnim.SetTrigger("Attack");
                 }
+                
             }
             // È¸Àü
             float angle = Vector3.Angle(dir, transform.forward);
