@@ -84,13 +84,13 @@ public class PlayerMove : CharProperty
             float dist = dir.magnitude - battleStat.AttackRange;
             if (dist < 0.01f) dist = 0.0f;
             dir.Normalize();
-            myAnim.SetBool("IsMoving", false);
+            myAnim.SetBool("IsMove", false);
 
             float delta = moveSpeed * Time.deltaTime;
             
             if (!Mathf.Approximately(dist, 0.0f))
             {
-                myAnim.SetBool("IsMoving", true);
+                myAnim.SetBool("IsMove", true);
                 if (delta > dist) delta = dist;
                 if (!myAnim.GetBool("IsAttac"))
                 {

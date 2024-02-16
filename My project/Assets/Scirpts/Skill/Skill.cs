@@ -17,7 +17,7 @@ public class Skill : ScriptableObject
 
     public bool IsAreaSelect = false;
     public GameObject AreaPrefab = null;
-    public bool IsDash = false;
+    
     [SerializeField]
     public UnityEvent<float, Transform, LayerMask> damageArea = null;
 

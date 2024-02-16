@@ -63,7 +63,7 @@ public class BattleSystem : PlayerMove, IDamage, ILive
             OnDead();
             myAnim.SetTrigger("Die");
         }
-    } 
+    }
     protected virtual void OnDead()
     {
 

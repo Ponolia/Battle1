@@ -407,14 +407,7 @@
 "Assets/Scirpts/Skill/Skill.cs"
 "Assets/Scirpts/SkillStatMachine.cs"
 "Assets/Scirpts/StateMachine/AttackStateMachine.cs"
-"Assets/UnityTechnologies/EffectExamples/Shared/Scripts/DecalDestroyer.cs"
-"Assets/UnityTechnologies/EffectExamples/Shared/Scripts/ExtinguishableFire.cs"
-"Assets/UnityTechnologies/EffectExamples/Shared/Scripts/GunAim.cs"
-"Assets/UnityTechnologies/EffectExamples/Shared/Scripts/GunShoot.cs"
-"Assets/UnityTechnologies/EffectExamples/Shared/Scripts/ParticleCollision.cs"
-"Assets/UnityTechnologies/EffectExamples/Shared/Scripts/ParticleExamples.cs"
-"Assets/UnityTechnologies/EffectExamples/Shared/Scripts/ParticleMenu.cs"
-"Assets/UnityTechnologies/EffectExamples/TutorialInfo/Scripts/Readme.cs"
+"Assets/UnityTechnologies/EffectExamples/Misc Effects/Scripts/SpawnEffect.cs"
 -langversion:9.0
 
 /deterministic

@@ -75,8 +75,5 @@ public class Monster : AIMoveMent
     {
         ChangeState(State.Normal);
     }
-    public void OnAttack()
-    {
-
-    }
+  
 }

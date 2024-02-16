@@ -28,37 +28,50 @@ public class PlayerCon : PlayerBattleSystem
         // 스킬 애니
         if (Input.GetKeyDown(KeyCode.Q) && !myAnim.GetBool("IsAttack"))
         {
-            myAnim.SetTrigger("Skill1");
+            QSkill();
         }
         if (Input.GetKeyDown(KeyCode.W) && !myAnim.GetBool("IsAttack"))
         {
-            myAnim.SetTrigger("Skill2");
+            WSkill();
         }
         if (Input.GetKeyDown(KeyCode.E) && !myAnim.GetBool("IsAttack"))
         {
-            myAnim.SetTrigger("Skill3");
+            ESkill();
         }
         if (Input.GetKeyDown(KeyCode.R) && !myAnim.GetBool("IsAttack"))
         {
 
         }
     }
-   public void SetTarget(Transform target)
+    public void SetTarget(Transform target)
     {
         myTarget = target;
-       AttackTarget(myTarget);
+        AttackTarget(myTarget);
     }
-    //public void OnBaseAttack(Vector3 pos, float size, LayerMask enemyMask, float dmg)
-    //{
-    //    Collider[] myCols = Physics.OverlapSphere(pos, size, enemyMask);
-    //    foreach (Collider col in myCols)
-    //    {
-    //        IDamage damage = col.GetComponent<IDamage>();
-    //        Vector3 attackVec = col.transform.position - pos;
-    //        attackVec.Normalize();
-    //        if (damage != null) damage.OnDamage(dmg);
-    //    }
-    //}
- 
- 
+    public void QSkill()
+    {
+        myAnim.SetTrigger("Skill1");
+    }
+    public void WSkill()
+    {
+        myAnim.SetTrigger("Skill2");
+    }
+    public void ESkill()
+    {
+        myAnim.SetTrigger("Skill3");
+    }
+   
+    public void OnSkill()
+    {
+        Collider[] list = Physics.OverlapSphere(myWeaponPos.position, 2.0f, enemyMask);
+        foreach (Collider col in list)
+        {
+            IDamage damage = col.GetComponent<IDamage>();
+            if (damage != null) damage.OnDamage(100.0f);
+        }
+    }
+    protected override void OnDead()
+    {
+        myAnim.SetTrigger("Hit");
+    }
 }

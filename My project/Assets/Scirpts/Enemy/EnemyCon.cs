@@ -17,7 +17,7 @@ public class EnemyCon : AIMoveMent
     GameObject hpBarObj = null;
     void ChangeState(State s)
     {
-        if (myState == s) return;
+        if (myState == s || myState == State.Dead) return;
         myState = s;
         switch (myState)
         {
@@ -37,7 +37,7 @@ public class EnemyCon : AIMoveMent
                 AttackTarget(myPerception.myTarget);
                 break;
             case State.Dead:
-                myCol.enabled = false;
+               // myCol.enabled = false;
                 StopAllCoroutines();
                 DisAppear();
 
@@ -84,6 +84,7 @@ public class EnemyCon : AIMoveMent
     }
     public void FindEnemy()
     {
+        myTarget = myPerception.myTarget;
         ChangeState(State.Battle);
     }
     public void LostEnemy()
@@ -91,19 +92,7 @@ public class EnemyCon : AIMoveMent
         myTarget = myPerception.myTarget;
         ChangeState(State.Normal);
     }
-    //public override void OnDamage(float dmg)
-    //{
-    //    curHP -= dmg;
-    //    if (curHP > 0)
-    //    {
-    //        myAnim.SetTrigger("Hit");
-    //    }
-    //    else if (curHP <= 0 && !IsLive)
-    //    {
-    //        ChangeState(State.Dead);
-    //    }
-       
-    //}
+  
     protected override void OnDead()
     {
         ChangeState(State.Dead);
