@@ -13,6 +13,7 @@ public class EnemyCon : AIMoveMent
 
     Vector3 startPos = Vector3.zero;
     public Transform barPoint = null;
+   // Transform uiHpBars = null;
     GameObject hpBarObj = null;
     void ChangeState(State s)
     {
@@ -36,9 +37,10 @@ public class EnemyCon : AIMoveMent
                 AttackTarget(myPerception.myTarget);
                 break;
             case State.Dead:
-                myPerception.enabled = false;
+                myCol.enabled = false;
                 StopAllCoroutines();
-                gameObject.SetActive(false);
+                DisAppear();
+
                 break;
         }
     }
@@ -69,12 +71,12 @@ public class EnemyCon : AIMoveMent
     private void OnEnable()
     {
         Initialize();
-        /*
+
         hpBarObj = Instantiate(Resources.Load("UI\\EnemyHPBar") as GameObject,
           GameObject.Find("Canvas").transform.GetChild(0));
         myHpBar = hpBarObj.GetComponent<Slider>();
         hpBarObj.GetComponent<EnemyHPBar>().SetTarget(transform);
-        */
+
     }
     void Update()
     {
@@ -89,14 +91,19 @@ public class EnemyCon : AIMoveMent
         myTarget = myPerception.myTarget;
         ChangeState(State.Normal);
     }
-    public override void OnDamage(float dmg)
-    {
-        base.OnDamage(dmg);
-        if (!IsLive)
-        {
-            ChangeState(State.Dead);
-        }
-    }
+    //public override void OnDamage(float dmg)
+    //{
+    //    curHP -= dmg;
+    //    if (curHP > 0)
+    //    {
+    //        myAnim.SetTrigger("Hit");
+    //    }
+    //    else if (curHP <= 0 && !IsLive)
+    //    {
+    //        ChangeState(State.Dead);
+    //    }
+       
+    //}
     protected override void OnDead()
     {
         ChangeState(State.Dead);

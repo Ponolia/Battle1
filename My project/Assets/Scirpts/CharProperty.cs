@@ -21,6 +21,34 @@ public class CharProperty : MonoBehaviour
             return anim;
         }
     }
+    Renderer _renderer = null;
+    protected Renderer myRenderer
+    {
+        get
+        {
+            if (_renderer == null)
+            {
+                _renderer = GetComponent<Renderer>();
+                if (_renderer == null)
+                {
+                    _renderer = GetComponentInChildren<Renderer>();
+                }
+            }
+            return _renderer;
+        }
+    }
+    Renderer[] _allRenders = null;
+    protected Renderer[] myAllRenders
+    {
+        get
+        {
+            if (_allRenders == null)
+            {
+                _allRenders = GetComponentsInChildren<Renderer>();
+            }
+            return _allRenders;
+        }
+    }
     Collider _col = null;
     protected Collider myCol
     {

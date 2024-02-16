@@ -44,21 +44,29 @@ public class Skill : ScriptableObject
     //일단 사용하지 않음.
     [SerializeField]
     public float Duration = 0.0f;
-    //============ 각 스킬의 피해 판정 함수 ===========================
-    //public void WarriorSkill_1(float dmg, Transform transform, LayerMask enemyMask)
-    //{
-    //    BattleManager.AttackDirCircle(transform.position + transform.forward * 3.0f, 3.0f,
-    //        enemyMask, dmg, transform.forward, false, KnockackDist);
-    //}
+    public void SkillAttack(float Dmg,int skillLV, Transform tr, LayerMask enemyMask)
+    {
+        damageArea?.Invoke(TotalDamage(Dmg, skillLV), tr, enemyMask);
+    }
+    public float TotalDamage(float playerAttackPoint, int skillLV)
+    {
+        return Mathf.Round((MultiDamage * playerAttackPoint + AddDamage) * (0.1f * skillLV + 1.0f));
+    }
+   // ============ 각 스킬의 피해 판정 함수 ===========================
+    public void WarriorSkill_1(float dmg, Transform transform, LayerMask enemyMask)
+    {
+        BattleManager.AttackDirCircle(transform.position + transform.forward * 3.0f, 3.0f,
+            enemyMask, dmg, transform.forward, false, KnockackDist);
+    }
 
-    //public void WarriorSkill_2(float dmg, Transform transform, LayerMask enemyMask)
-    //{
-    //    BattleManager.AttackCircle(transform.position, 3.0f, enemyMask, dmg,
-    //        false, KnockackDist);
-    //}
-    //public static void WarriorSkill_3(float dmg, Transform transform, LayerMask enemyMask)
-    //{
-    //    BattleManager.AttackCircle(transform.position, 1.0f, enemyMask, dmg,
-    //        false, 0.1f);
-    //}
+    public void WarriorSkill_2(float dmg, Transform transform, LayerMask enemyMask)
+    {
+        BattleManager.AttackCircle(transform.position, 3.0f, enemyMask, dmg,
+            false, KnockackDist);
+    }
+    public static void WarriorSkill_3(float dmg, Transform transform, LayerMask enemyMask)
+    {
+        BattleManager.AttackCircle(transform.position, 1.0f, enemyMask, dmg,
+            false, 0.1f);
+    }
 }

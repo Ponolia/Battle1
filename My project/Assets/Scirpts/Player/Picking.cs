@@ -21,14 +21,14 @@ public class Picking : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, clickMask | attackMask))
             {
-                if ((1 << hit.transform.gameObject.layer & attackMask) !=0 )
+                if ((1 << hit.transform.gameObject.layer & attackMask) != 0)
                 {
                     attackAct?.Invoke(hit.transform);
                 }
                 else
                 {
                     clickAct?.Invoke(hit.point);
-                } 
+                }
             }
         }
     }
