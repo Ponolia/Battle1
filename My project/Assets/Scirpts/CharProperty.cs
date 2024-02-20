@@ -63,6 +63,8 @@ public class CharProperty : MonoBehaviour
     }
     public BattleStat battleStat;
     public Slider myHpBar = null;
+    public Slider myMpBar = null;
+    public Slider myExpBar = null;
     float _hp = 0.0f;
     protected float curHP
     {
@@ -71,6 +73,47 @@ public class CharProperty : MonoBehaviour
         {
             _hp = Mathf.Clamp(value, 0.0f, battleStat.MaxHpPoint);
             if (myHpBar != null) myHpBar.value = _hp / battleStat.MaxHpPoint;
+        }
+    }
+    float _mp = 0.0f;
+
+    public float curMP
+    {
+        get => _mp;
+        set
+        {
+            _mp = Mathf.Clamp(value, 0.0f, battleStat.MaxMpPoint);
+        }
+    }
+    float _exp = 0.0f;
+
+    public float curExp
+    {
+        get => _exp;
+        set
+        {
+            _exp = Mathf.Clamp(value, 0.0f, battleStat.MaxExp);
+            if (myExpBar != null) myExpBar.value = _exp / battleStat.MaxExp;
+        }
+    }
+    float _ap = 0.0f;
+    public float curAttackPoint
+    {
+        get => _ap;
+        set
+        {
+            _ap = value;
+        }
+    }
+
+    float _dp = 0.0f;
+
+    public float curDefensePoint
+    {
+        get => _dp;
+        set
+        {
+            _dp = value;
         }
     }
     protected float playTime = 0.0f;

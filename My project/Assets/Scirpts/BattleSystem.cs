@@ -16,8 +16,12 @@ public interface ILive
 [System.Serializable]
 public struct BattleStat
 {
+    public int LV;
     public float MaxHpPoint;
+    public float MaxMpPoint;
+    public int MaxExp;
     public float AttackPoint;
+    public float DefensePoint;
     public float AttackRange;
     public float AttackDelay;
 }
@@ -25,9 +29,14 @@ public class BattleSystem : PlayerMove, IDamage, ILive
 {
     protected Transform myTarget = null;
     [SerializeField] protected LayerMask enemyMask;
-    protected void Initialize() 
+    protected virtual void Initialize() 
     {
         curHP = battleStat.MaxHpPoint;
+        curMP = battleStat.MaxMpPoint;
+        curExp = 0;
+        curAttackPoint = battleStat.AttackPoint;
+        curDefensePoint = battleStat.DefensePoint;
+
     }
     public bool IsLive
     {

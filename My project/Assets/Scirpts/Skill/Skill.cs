@@ -53,18 +53,22 @@ public class Skill : ScriptableObject
         return Mathf.Round((MultiDamage * playerAttackPoint + AddDamage) * (0.1f * skillLV + 1.0f));
     }
    // ============ 각 스킬의 피해 판정 함수 ===========================
-    public void WarriorSkill_1(float dmg, Transform transform, LayerMask enemyMask)
+    public void SwordSkill_1(float dmg, Transform transform, LayerMask enemyMask)
+    {
+        BattleManager.AttackCircle(transform.position, 1.0f, enemyMask, dmg,
+            false, 0.1f);
+    }
+    public void SwordSkill_2(float dmg, Transform transform, LayerMask enemyMask)
     {
         BattleManager.AttackDirCircle(transform.position + transform.forward * 3.0f, 3.0f,
             enemyMask, dmg, transform.forward, false, KnockackDist);
     }
-
-    public void WarriorSkill_2(float dmg, Transform transform, LayerMask enemyMask)
+    public static void SwordSkill_3(float dmg, Transform transform, LayerMask enemyMask)
     {
-        BattleManager.AttackCircle(transform.position, 3.0f, enemyMask, dmg,
-            false, KnockackDist);
+        BattleManager.AttackDirCircle(transform.position + transform.forward * 3.0f, 3.0f,
+           enemyMask, dmg, transform.forward, false, 0.5f);
     }
-    public static void WarriorSkill_3(float dmg, Transform transform, LayerMask enemyMask)
+    public static void SwordSkill_4(float dmg, Transform transform, LayerMask enemyMask)
     {
         BattleManager.AttackCircle(transform.position, 1.0f, enemyMask, dmg,
             false, 0.1f);

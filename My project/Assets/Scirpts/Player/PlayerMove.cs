@@ -8,6 +8,8 @@ public class PlayerMove : CharProperty
 {
     public float moveSpeed = 1.0f;
     public float rotSpeed = 360.0f;
+    public LayerMask skillClickMask;
+    public LayerMask virtualGroundMask;
 
     private void Update()
     {
@@ -84,7 +86,7 @@ public class PlayerMove : CharProperty
             float dist = dir.magnitude - battleStat.AttackRange;
             if (dist < 0.01f) dist = 0.0f;
             dir.Normalize();
-            myAnim.SetBool("IsMove", false);
+            
 
             float delta = moveSpeed * Time.deltaTime;
             
@@ -92,14 +94,14 @@ public class PlayerMove : CharProperty
             {
                 myAnim.SetBool("IsMove", true);
                 if (delta > dist) delta = dist;
-                if (!myAnim.GetBool("IsAttac"))
+                if (!myAnim.GetBool("IsAttack"))
                 {
                     transform.Translate(dir * delta, Space.World);
                 }
             }
             else
             {
-               
+                myAnim.SetBool("IsMove", false);
                 if (playTime >= battleStat.AttackDelay)
                 {
                     playTime = 0.0f;

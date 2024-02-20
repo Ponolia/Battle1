@@ -7,7 +7,7 @@ public class Monster : AIMoveMent
 
     public enum State
     {
-        Create, Normal, Roaming, Battle
+        Create, Normal, Roaming, Battle, Dead
     }
     public State myState = State.Create;
 
@@ -21,22 +21,28 @@ public class Monster : AIMoveMent
         switch (myState)
         {
             case State.Normal:
-                //if (IsRoaming)
-                //{
-                Vector3 rndDir = Vector3.forward;
-                Quaternion rndRot = Quaternion.Euler(0, Random.Range(0.0f, 360.0f), 0);
-                float dist = Random.Range(0.0f, 5.0f);
-                rndDir = rndRot * rndDir * dist;
-                Vector3 rndPos = startPos + rndDir;
-
-                MovetoPos(rndPos, () => StartCoroutine(Waiting(Random.Range(1.0f, 3.0f))));
-                ChangeState(State.Roaming);
-                //  }
+                
                 break;
             case State.Roaming:
+                transform.LookAt(startPos);
+                myAnim.SetBool("IsMove", true);
+                float dist = Vector3.Distance(transform.position, startPos);
+                this.transform.position = Vector3.MoveTowards(transform.position, startPos, Time.deltaTime * 3.0f);
+                if (dist <= 0.1f)
+                {
+                    myAnim.SetBool("IsMove", false);
+                }
+                ChangeState(State.Normal);
                 break;
             case State.Battle:
+                myTarget = myPerception.myTarget;
                 AttackTarget(myPerception.myTarget);
+                break;
+            case State.Dead:
+                // myCol.enabled = false;
+                StopAllCoroutines();
+                DisAppear();
+
                 break;
         }
     }
@@ -56,11 +62,20 @@ public class Monster : AIMoveMent
                 break;
         }
     }
+    public override void OnDamage(float dmg)
+    {
+        curHP -= dmg;
+        if (myPerception.myTarget != null)
+        {
+            ChangeState(State.Battle);
+        }
+        base.OnDamage(dmg);
+    }
 
     void Start()
     {
         startPos = transform.position; // 스타트 지점 저장
-        ChangeState(State.Normal);
+        ChangeState(State.Normal); Initialize();
     }
     void Update()
     {
@@ -68,12 +83,34 @@ public class Monster : AIMoveMent
     }
     public void FindEnemy()
     {
-        // 공격받을시로바꿔야함!!
-        ChangeState(State.Battle);
+      
     }
     public void LostEnemy()
     {
-        ChangeState(State.Normal);
+        myTarget = myPerception.myTarget;
+        ChangeState(State.Roaming);
     }
-  
+    protected override void OnDead()
+    {
+        ChangeState(State.Dead);
+    }
+    public void DisAppear()
+    {
+       // Destroy(hpBarObj);
+        StartCoroutine(DisAppearing(0.5f, 2.0f));
+    }
+    IEnumerator DisAppearing(float speed, float t)
+    {
+        yield return new WaitForSeconds(t);
+        float dist = 2.0f;
+        while (dist > 0.0f)
+        {
+            float delta = speed * Time.deltaTime;
+            dist -= delta;
+            transform.Translate(Vector3.down * delta, Space.World);
+            yield return null;
+        }
+        Destroy(gameObject);
+    }
+
 }
