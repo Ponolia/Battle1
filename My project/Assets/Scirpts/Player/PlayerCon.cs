@@ -72,7 +72,7 @@ public class PlayerCon : PlayerBattleSystem
     //}
     protected override void OnDead()
     {
-        myAnim.SetTrigger("Hit");
+        myAnim.SetTrigger("Die");
     }
     public Skills GetSkill()
     {

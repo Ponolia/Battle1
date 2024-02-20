@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Monster : AIMoveMent
 {
@@ -11,30 +12,24 @@ public class Monster : AIMoveMent
     }
     public State myState = State.Create;
 
-    public bool IsRoaming;
 
+    NavMeshAgent agent;
     Vector3 startPos = Vector3.zero;
     void ChangeState(State s)
     {
-        if (myState == s) return;
+        if (myState == s || myState == State.Dead ) return;
         myState = s;
         switch (myState)
         {
             case State.Normal:
-                
+                StopAllCoroutines();
+                MovetoPos(startPos);
                 break;
             case State.Roaming:
-                transform.LookAt(startPos);
-                myAnim.SetBool("IsMove", true);
-                float dist = Vector3.Distance(transform.position, startPos);
-                this.transform.position = Vector3.MoveTowards(transform.position, startPos, Time.deltaTime * 3.0f);
-                if (dist <= 0.1f)
-                {
-                    myAnim.SetBool("IsMove", false);
-                }
                 ChangeState(State.Normal);
                 break;
             case State.Battle:
+                StopAllCoroutines();
                 myTarget = myPerception.myTarget;
                 AttackTarget(myPerception.myTarget);
                 break;
@@ -76,6 +71,7 @@ public class Monster : AIMoveMent
     {
         startPos = transform.position; // 스타트 지점 저장
         ChangeState(State.Normal); Initialize();
+        agent = GetComponent<NavMeshAgent>();
     }
     void Update()
     {
@@ -112,5 +108,6 @@ public class Monster : AIMoveMent
         }
         Destroy(gameObject);
     }
+ 
 
 }

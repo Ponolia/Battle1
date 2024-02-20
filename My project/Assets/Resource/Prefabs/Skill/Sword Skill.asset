@@ -14,15 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 21300000, guid: 2d089513ae4adfc48a683c362ad9992c, type: 3}
   animationClip: {fileID: 7400000, guid: e766df63684ec3247ac1407addad575b, type: 2}
-  EffectPrefab: {fileID: 8167987559886448934, guid: 68f18e2eef452f74795d2bffff8f930f, type: 3}
-  IsAreaSelect: 0
-  AreaPrefab: {fileID: 0}
+  EffectPrefab: {fileID: 7957833072274404953, guid: 3355f6bfa6db8b24281b827de929694c, type: 3}
+  IsAreaSelect: 1
+  AreaPrefab: {fileID: 4932088507883938021, guid: 0e5709a7ddb77924090c112cf73bb98a, type: 3}
   damageArea:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11400000}
         m_TargetAssemblyTypeName: Skill, Assembly-CSharp
-        m_MethodName: WarriorSkill_1
+        m_MethodName: SwordSkill_1
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -14,12 +14,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 21300000, guid: 7092324b93851a14c858530cca4a6b26, type: 3}
   animationClip: {fileID: 7400000, guid: 877999ccb638b6c488cb9608ac64cd10, type: 2}
-  EffectPrefab: {fileID: 0}
+  EffectPrefab: {fileID: 2060900179291159282, guid: ca6705a3f9070d14d819d179493bcfa0, type: 3}
   IsAreaSelect: 1
-  AreaPrefab: {fileID: 114946001904165509, guid: bd7854e0b1ab37748add6a0f144b34b6, type: 3}
+  AreaPrefab: {fileID: 4932088507883938021, guid: 0e5709a7ddb77924090c112cf73bb98a, type: 3}
   damageArea:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11400000}
+        m_TargetAssemblyTypeName: Skill, Assembly-CSharp
+        m_MethodName: SwordSkill_3
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   MultiDamage: 1
   AddDamage: 0
   CoolTime: 0

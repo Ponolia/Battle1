@@ -22,4 +22,10 @@ public class UiManager : MonoBehaviour
     {
         
     }
+
+    public void DefalutSetting()
+    {
+        mySkillUI.SetSkillUI();
+    }
+
 }

@@ -97,18 +97,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   battleStat:
-    MaxHpPoint: 0
-    AttackPoint: 0
+    LV: 0
+    MaxHpPoint: 500
+    MaxMpPoint: 0
+    MaxExp: 0
+    AttackPoint: 2
+    DefensePoint: 0
     AttackRange: 2
     AttackDelay: 3
   myHpBar: {fileID: 0}
+  myMpBar: {fileID: 0}
+  myExpBar: {fileID: 0}
   moveSpeed: 1
   rotSpeed: 360
+  skillClickMask:
+    serializedVersion: 2
+    m_Bits: 0
+  virtualGroundMask:
+    serializedVersion: 2
+    m_Bits: 0
   enemyMask:
     serializedVersion: 2
     m_Bits: 64
   myState: 0
-  IsRoaming: 0
 --- !u!1 &7851854659329918991
 GameObject:
   m_ObjectHideFlags: 0
@@ -182,7 +193,7 @@ MonoBehaviour:
   findEnemy:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 8369090264328691119}
         m_TargetAssemblyTypeName: Monster, Assembly-CSharp
         m_MethodName: FindEnemy
         m_Mode: 1
@@ -197,7 +208,7 @@ MonoBehaviour:
   lostEnemy:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 8369090264328691119}
         m_TargetAssemblyTypeName: Monster, Assembly-CSharp
         m_MethodName: LostEnemy
         m_Mode: 1

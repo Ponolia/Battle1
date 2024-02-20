@@ -18,7 +18,7 @@ public class DoSkill : MonoBehaviour
     public void OnClicked()
     {
         if (CoolTime.fillAmount > 0) return;
-        StartCoroutine(cool);
+        StartCoroutine("cool");
     }
     IEnumerator cool()
     {
