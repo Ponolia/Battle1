@@ -14,15 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 21300000, guid: 2c04f4986ebc72e48a8b0c3eb2e42db2, type: 3}
   animationClip: {fileID: 7400000, guid: 2e6730e23b9613e4aa082839fe53240f, type: 2}
-  EffectPrefab: {fileID: 9035088595281898957, guid: c116997af4a50ef4493c422d96ea6444, type: 3}
-  IsAreaSelect: 1
-  AreaPrefab: {fileID: 462506874625469812, guid: b18bcc905953bd14ebda362382bf2fc9, type: 3}
+  EffectPrefab: {fileID: 7823668824789794801, guid: c116997af4a50ef4493c422d96ea6444, type: 3}
+  IsAreaSelect: 0
+  AreaPrefab: {fileID: 0}
   damageArea:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11400000}
         m_TargetAssemblyTypeName: Skill, Assembly-CSharp
-        m_MethodName: SwordSkill_2
+        m_MethodName: SwordSkill_4
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -33,11 +33,11 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   MultiDamage: 1
-  AddDamage: 0
-  CoolTime: 0
+  AddDamage: 1
+  CoolTime: 2
   AttackCount: 1
   AttackInterval: 0.2
   KnockackDist: 0
   SkillSound: {fileID: 0}
   Range: 2
-  Duration: 0
+  Duration: 2

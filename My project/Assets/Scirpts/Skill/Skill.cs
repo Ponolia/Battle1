@@ -55,18 +55,18 @@ public class Skill : ScriptableObject
    // ============ 각 스킬의 피해 판정 함수 ===========================
     public void SwordSkill_1(float dmg, Transform transform, LayerMask enemyMask)
     {
-        BattleManager.AttackCircle(transform.position, 1.0f, enemyMask, dmg,
-            false, 0.1f);
+        BattleManager.AttackCircle(transform.position + transform.forward *2.0f, 1.0f, enemyMask, dmg
+           ,false, 0.1f);
     }
     public void SwordSkill_2(float dmg, Transform transform, LayerMask enemyMask)
     {
-        BattleManager.AttackDirCircle(transform.position + transform.forward * 3.0f, 3.0f,
+        BattleManager.AttackDirCircle(transform.position + transform.forward, 3.0f,
             enemyMask, dmg, transform.forward, false, KnockackDist);
     }
-    public static void SwordSkill_3(float dmg, Transform transform, LayerMask enemyMask)
+    public  void SwordSkill_3(float dmg, Transform transform, LayerMask enemyMask)
     {
-        BattleManager.AttackDirCircle(transform.position + transform.forward * 3.0f, 3.0f,
-           enemyMask, dmg, transform.forward, false, 0.5f);
+        BattleManager.AttackDirCircle(transform.position, 3.0f,
+           enemyMask, dmg, transform.forward, false, KnockackDist);
     }
     public static void SwordSkill_4(float dmg, Transform transform, LayerMask enemyMask)
     {

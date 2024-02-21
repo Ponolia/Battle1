@@ -105,6 +105,8 @@ public class PlayerBattleSystem : BattleSystem
             return;
         }
 
+        usingSkill = skillInfo;
+
         if (skillInfo.skill.IsAreaSelect)
         {
             //skill.AreaPrefab »ý¼º
