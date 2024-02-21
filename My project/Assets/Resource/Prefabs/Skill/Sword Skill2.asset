@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 21300000, guid: 7092324b93851a14c858530cca4a6b26, type: 3}
   animationClip: {fileID: 7400000, guid: 877999ccb638b6c488cb9608ac64cd10, type: 2}
-  EffectPrefab: {fileID: 2060900179291159282, guid: ca6705a3f9070d14d819d179493bcfa0, type: 3}
+  EffectPrefab: {fileID: 5226381993060827808, guid: 39a16e58de7d78e49b4185cb83ec5ad6, type: 3}
   IsAreaSelect: 1
-  AreaPrefab: {fileID: 4932088507883938021, guid: 0e5709a7ddb77924090c112cf73bb98a, type: 3}
+  AreaPrefab: {fileID: 6739405167898228884, guid: c9303c492a9271646b36824c6bf96900, type: 3}
   damageArea:
     m_PersistentCalls:
       m_Calls:

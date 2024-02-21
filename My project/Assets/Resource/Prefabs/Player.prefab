@@ -867,9 +867,9 @@ MonoBehaviour:
     m_Bits: 128
   equippedSkills:
     QSkill: {fileID: 11400000, guid: 31ea8cf3547b78944ad4d411970e9943, type: 2}
-    WSkill: {fileID: 11400000, guid: 74501b48350150e448375b451ce58ee7, type: 2}
+    WSkill: {fileID: 11400000, guid: a1ea439c019663b479f6396006c4b731, type: 2}
     ESkill: {fileID: 11400000, guid: 73c9bf5d9541c6a4292cad19db9dff4b, type: 2}
-    RSkill: {fileID: 0}
+    RSkill: {fileID: 11400000, guid: 74501b48350150e448375b451ce58ee7, type: 2}
   myWeaponPos: {fileID: 244350671049458287}
   attackMask:
     serializedVersion: 2
@@ -2404,6 +2404,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  SkillEffectStartAction:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &7155194726581855130
 MonoBehaviour:
   m_ObjectHideFlags: 0

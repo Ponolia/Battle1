@@ -8,6 +8,7 @@ public class AnimEvent : MonoBehaviour
     public UnityEvent AttackAct;
     public UnityEvent DeadAct;
     public UnityEvent SkillAct;
+    public UnityEvent SkillEffectStartAction;
 
     void Start()
     {
@@ -30,4 +31,9 @@ public class AnimEvent : MonoBehaviour
     {
         SkillAct?.Invoke();
     }
+    public void OnSkillEffectStart()
+    {
+        SkillEffectStartAction?.Invoke();
+    }
+
 }
