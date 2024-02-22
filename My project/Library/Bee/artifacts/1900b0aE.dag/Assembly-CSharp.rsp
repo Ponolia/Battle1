@@ -406,6 +406,7 @@
 "Assets/Scirpts/EnemyHPBar.cs"
 "Assets/Scirpts/FollowCam.cs"
 "Assets/Scirpts/FollowTarget.cs"
+"Assets/Scirpts/Map.cs"
 "Assets/Scirpts/Player/Picking.cs"
 "Assets/Scirpts/Player/PlayerBattleSystem.cs"
 "Assets/Scirpts/Player/PlayerCon.cs"

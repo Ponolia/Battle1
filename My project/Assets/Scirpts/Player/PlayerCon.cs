@@ -9,13 +9,13 @@ public class PlayerCon : PlayerBattleSystem
     public Transform myWeaponPos;
     public LayerMask attackMask;
     public UnityEvent<Transform> attackAct;
-    // Start is called before the first frame update
+    Map map;
     void Start()
     {
         Initialize();
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         // 기본 공격
@@ -77,6 +77,10 @@ public class PlayerCon : PlayerBattleSystem
     public Skills GetSkill()
     {
         return equippedSkills;
+    }
+    public override void OnDamage(float dmg)
+    {       
+        base.OnDamage(dmg);
     }
 
 }

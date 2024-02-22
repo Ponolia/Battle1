@@ -5,15 +5,12 @@ using UnityEngine.AI;
 
 public class Monster : AIMoveMent
 {
-
     public enum State
     {
         Create, Normal, Roaming, Battle, Dead
     }
     public State myState = State.Create;
 
-
-    NavMeshAgent agent;
     Vector3 startPos = Vector3.zero;
     void ChangeState(State s)
     {
@@ -70,8 +67,8 @@ public class Monster : AIMoveMent
     void Start()
     {
         startPos = transform.position; // 스타트 지점 저장
-        ChangeState(State.Normal); Initialize();
-        agent = GetComponent<NavMeshAgent>();
+        ChangeState(State.Normal);
+        Initialize();
     }
     void Update()
     {
