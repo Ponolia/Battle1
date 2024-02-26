@@ -9,7 +9,7 @@ public class PlayerCon : PlayerBattleSystem
     public Transform myWeaponPos;
     public LayerMask attackMask;
     public UnityEvent<Transform> attackAct;
-    Map map;
+   
     void Start()
     {
         Initialize();

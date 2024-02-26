@@ -13,7 +13,7 @@ public class EnemyCon : AIMoveMent
 
     Vector3 startPos = Vector3.zero;
     public Transform barPoint = null;
-   // Transform uiHpBars = null;
+    // Transform uiHpBars = null;
     GameObject hpBarObj = null;
     void ChangeState(State s)
     {
@@ -22,22 +22,23 @@ public class EnemyCon : AIMoveMent
         switch (myState)
         {
             case State.Normal:
-               
-                    Vector3 rndDir = Vector3.forward;
-                    Quaternion rndRot = Quaternion.Euler(0, Random.Range(0.0f, 360.0f), 0);
-                    float dist = Random.Range(0.0f, 5.0f);
-                    rndDir = rndRot * rndDir * dist;
-                    Vector3 rndPos = startPos + rndDir;
 
-                    MovetoPos(rndPos, () => StartCoroutine(Waiting(Random.Range(1.0f, 3.0f))));
-                    ChangeState(State.Roaming);
-                
+                Vector3 rndDir = Vector3.forward;
+                Quaternion rndRot = Quaternion.Euler(0, Random.Range(0.0f, 360.0f), 0);
+                float dist = Random.Range(0.0f, 5.0f);
+                rndDir = rndRot * rndDir * dist;
+                Vector3 rndPos = startPos + rndDir;
+
+                MovetoPos(rndPos, () => StartCoroutine(Waiting(Random.Range(1.0f, 3.0f))));
+                ChangeState(State.Roaming);
+
                 break;
             case State.Battle:
-                AttackTarget(myPerception.myTarget);
+                AttackTarget(myTarget);
+                // AttackTarget(myPerception.myTarget);
                 break;
             case State.Dead:
-               // myCol.enabled = false;
+                // myCol.enabled = false;
                 StopAllCoroutines();
                 DisAppear();
 
@@ -55,7 +56,7 @@ public class EnemyCon : AIMoveMent
         {
             case State.Normal:
                 break;
-           
+
             case State.Battle:
                 break;
         }
@@ -67,7 +68,7 @@ public class EnemyCon : AIMoveMent
 
         ChangeState(State.Normal);
     }
-   
+
     private void OnEnable()
     {
         Initialize();
@@ -92,7 +93,7 @@ public class EnemyCon : AIMoveMent
         myTarget = myPerception.myTarget;
         ChangeState(State.Normal);
     }
-  
+
     protected override void OnDead()
     {
         ChangeState(State.Dead);
@@ -102,7 +103,7 @@ public class EnemyCon : AIMoveMent
         Destroy(hpBarObj);
         StartCoroutine(DisAppearing(0.5f, 2.0f));
     }
-    IEnumerator DisAppearing(float speed,float t)
+    IEnumerator DisAppearing(float speed, float t)
     {
         yield return new WaitForSeconds(t);
         float dist = 2.0f;

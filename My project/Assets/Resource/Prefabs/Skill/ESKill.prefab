@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9c112016e4f68a4d8572fed048719be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectDuration: 1
+  effectDuration: 0.5
 --- !u!1001 &308000051325214547
 PrefabInstance:
   m_ObjectHideFlags: 0

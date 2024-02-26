@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
+using UnityEngine.UI;
+
 
 public class Monster : AIMoveMent
 {
@@ -11,7 +12,13 @@ public class Monster : AIMoveMent
     }
     public State myState = State.Create;
 
+    public bool isRespawn = true;
+    public float respawnTime = 3.0f;
+
+    EnemySpawner spawner = null;
+
     Vector3 startPos = Vector3.zero;
+    GameObject hpBarObj = null;
     void ChangeState(State s)
     {
         if (myState == s || myState == State.Dead ) return;
@@ -63,12 +70,28 @@ public class Monster : AIMoveMent
         }
         base.OnDamage(dmg);
     }
-
-    void Start()
+    void Awake()
     {
         startPos = transform.position; // 스타트 지점 저장
-        ChangeState(State.Normal);
+        if (transform.parent != null)
+            transform.parent.TryGetComponent<EnemySpawner>(out spawner);
+    }
+
+    void OnEnable()
+    {
         Initialize();
+
+        hpBarObj = Instantiate(Resources.Load("UI\\EnemyHPBar") as GameObject,
+            GameObject.Find("DynamicCanvas").transform.GetChild(0));
+        myHpBar = hpBarObj.GetComponent<Slider>();
+        hpBarObj.GetComponent<EnemyHPBar>().SetTarget(transform);
+        StartCoroutine(StartDelaying(2.0f));
+    }
+    IEnumerator StartDelaying(float t)
+    {
+        yield return new WaitForSeconds(t);
+        ChangeState(State.Normal);
+        myPerception.gameObject.SetActive(true);
     }
     void Update()
     {
@@ -103,6 +126,22 @@ public class Monster : AIMoveMent
             transform.Translate(Vector3.down * delta, Space.World);
             yield return null;
         }
-        Destroy(gameObject);
+        //리스폰 할지 안할지
+        if (isRespawn && spawner != null)
+        {
+            //리스폰
+            spawner.Respawn(this, respawnTime);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+    public void Respawn()
+    {
+        transform.position = startPos;
+        myCol.enabled = true;
+        myPerception.gameObject.SetActive(false);
+        ChangeState(State.Create);
     }
 }
