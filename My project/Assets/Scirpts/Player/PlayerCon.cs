@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 public class PlayerCon : PlayerBattleSystem
 {
-    public Transform myWeaponPos;
+    public Transform attackArea;
     public LayerMask attackMask;
     public UnityEvent<Transform> attackAct;
    

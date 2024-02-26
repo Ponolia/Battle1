@@ -34,8 +34,8 @@ MonoBehaviour:
         m_CallState: 2
   MultiDamage: 1
   AddDamage: 1
-  CoolTime: 2
-  AttackCount: 1
+  CoolTime: 10
+  AttackCount: 2
   AttackInterval: 0.2
   KnockackDist: 0
   SkillSound: {fileID: 0}

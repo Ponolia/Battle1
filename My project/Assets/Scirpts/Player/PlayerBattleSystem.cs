@@ -155,11 +155,11 @@ public class PlayerBattleSystem : BattleSystem
     {
         //ÄðÅ¸ÀÓ
         StartCoroutine(CoolingSkill(skillInfo));
-        //if (!skillInfo.skill)
-        //{
-        //    usingSkill = skillInfo;
-        //    usingSkillPos = effectPos;
-        //}
+        if (!skillInfo.skill)
+        {
+            usingSkill = skillInfo;            
+        }
+        usingSkillPos = effectPos;
         myAnim.SetTrigger(skillInfo.skill.animationClip.name);
 
         myAnim.SetBool("IsAttack", true);

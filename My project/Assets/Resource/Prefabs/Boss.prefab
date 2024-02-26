@@ -93,7 +93,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 14
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!136 &7935055670782810920
 CapsuleCollider:
@@ -132,13 +132,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   battleStat:
     LV: 0
-    MaxHpPoint: 0
-    MaxMpPoint: 0
+    MaxHpPoint: 100
+    MaxMpPoint: 100
     MaxExp: 0
-    AttackPoint: 0
+    AttackPoint: 10
     DefensePoint: 0
-    AttackRange: 0
-    AttackDelay: 0
+    AttackRange: 2
+    AttackDelay: 3
   myHpBar: {fileID: 0}
   myMpBar: {fileID: 0}
   myExpBar: {fileID: 0}
@@ -153,8 +153,10 @@ MonoBehaviour:
   enemyMask:
     serializedVersion: 2
     m_Bits: 64
+  attackArea1: {fileID: 0}
+  attackArea2: {fileID: 0}
+  attackArea3: {fileID: 0}
   myState: 0
-  barPoint: {fileID: 0}
 --- !u!1 &1843360995518580695
 GameObject:
   m_ObjectHideFlags: 0
@@ -197,7 +199,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1110098707998775374}
   - component: {fileID: 2982384110558925577}
-  m_Layer: 7
+  - component: {fileID: 4964119102529951774}
+  m_Layer: 0
   m_Name: AIPerception
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -237,10 +240,43 @@ MonoBehaviour:
   enemyList: []
   findEnemy:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: -1995174928981866042}
+        m_TargetAssemblyTypeName: EnemyCon, Assembly-CSharp
+        m_MethodName: FindEnemy
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   lostEnemy:
     m_PersistentCalls:
       m_Calls: []
+--- !u!135 &4964119102529951774
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5173433263813903756}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 4
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1331087734988412281
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -731,6 +767,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1848789066296867047}
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5b109e3de7748d44d874e862575822cf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5355014250738864640}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5b109e3de7748d44d874e862575822cf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 640318514333570155}
     - targetCorrespondingSourceObject: {fileID: -646874606815247751, guid: 5b109e3de7748d44d874e862575822cf, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1603684131287546047}
@@ -787,6 +829,104 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5b109e3de7748d44d874e862575822cf, type: 3}
   m_PrefabInstance: {fileID: 7365761293938608786}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7708219789260715971 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 5b109e3de7748d44d874e862575822cf, type: 3}
+  m_PrefabInstance: {fileID: 7365761293938608786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5355014250738864640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7708219789260715971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 759623e50fddcf2469f4589bd16e21c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &640318514333570155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7708219789260715971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d77d40d6bfc79dc47bf6fa8311324bc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AttackAct:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -1995174928981866042}
+        m_TargetAssemblyTypeName: EnemyCon, Assembly-CSharp
+        m_MethodName: BossAttack1
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  AttackAct2:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -1995174928981866042}
+        m_TargetAssemblyTypeName: EnemyCon, Assembly-CSharp
+        m_MethodName: BossAttack2
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  AttackAct3:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -1995174928981866042}
+        m_TargetAssemblyTypeName: EnemyCon, Assembly-CSharp
+        m_MethodName: BossAttack3
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  AttackAct4:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -1995174928981866042}
+        m_TargetAssemblyTypeName: EnemyCon, Assembly-CSharp
+        m_MethodName: BossAttack4
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  DeadAct:
+    m_PersistentCalls:
+      m_Calls: []
+  SkillAct:
+    m_PersistentCalls:
+      m_Calls: []
+  SkillEffectStartAction:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &9191244398776792410 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1852576806548013000, guid: 5b109e3de7748d44d874e862575822cf, type: 3}

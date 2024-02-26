@@ -81,7 +81,7 @@ public class Monster : AIMoveMent
     {
         Initialize();
 
-        hpBarObj = Instantiate(Resources.Load("UI\\EnemyHPBar") as GameObject,
+        hpBarObj = Instantiate(Resources.Load("UI\\EnemyHpBar") as GameObject,
             GameObject.Find("DynamicCanvas").transform.GetChild(0));
         myHpBar = hpBarObj.GetComponent<Slider>();
         hpBarObj.GetComponent<EnemyHPBar>().SetTarget(transform);
