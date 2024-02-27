@@ -5,11 +5,13 @@ using UnityEngine.Events;
 
 public class Picking : MonoBehaviour
 {
-    public LayerMask clickMask;
+    public LayerMask movekMask;
+    public LayerMask objMask;
     public LayerMask attackMask;
-    public UnityEvent<Vector3> clickAct;
+    public UnityEvent<Vector3> moveAct;
     public UnityEvent<Transform> attackAct;
-   
+    public UnityEvent<Transform> objAct;
+
     private void Start()
     {
         
@@ -19,7 +21,7 @@ public class Picking : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, clickMask | attackMask))
+            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, movekMask | attackMask))
             {
                 if ((1 << hit.transform.gameObject.layer & attackMask) != 0)
                 {
@@ -27,8 +29,16 @@ public class Picking : MonoBehaviour
                 }
                 else
                 {
-                    clickAct?.Invoke(hit.point);
+                    moveAct?.Invoke(hit.point);
                 }
+            }
+        }
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, objMask))
+            {
+                objAct?.Invoke(hit.transform);
             }
         }
     }

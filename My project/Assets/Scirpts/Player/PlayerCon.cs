@@ -48,28 +48,6 @@ public class PlayerCon : PlayerBattleSystem
         myTarget = target;
         AttackTarget(myTarget);
     }
-    //public void QSkill()
-    //{
-    //    myAnim.SetTrigger("Skill1");
-    //}
-    //public void WSkill()
-    //{
-    //    myAnim.SetTrigger("Skill2");
-    //}
-    //public void ESkill()
-    //{
-    //    myAnim.SetTrigger("Skill3");
-    //}
-   
-    //public void OnSkill()
-    //{
-    //    Collider[] list = Physics.OverlapSphere(myWeaponPos.position, 2.0f, enemyMask);
-    //    foreach (Collider col in list)
-    //    {
-    //        IDamage damage = col.GetComponent<IDamage>();
-    //        if (damage != null) damage.OnDamage(100.0f);
-    //    }
-    //}
     protected override void OnDead()
     {
         myAnim.SetTrigger("Die");
@@ -83,4 +61,9 @@ public class PlayerCon : PlayerBattleSystem
         base.OnDamage(dmg);
     }
 
+    public void OnActiveObj(Transform target)
+    {
+        target.GetComponent<Teleport>().Enter(this);
+        //target.GetComponent<Shop>().Enter(this);
+    }
 }
