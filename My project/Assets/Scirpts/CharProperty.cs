@@ -66,7 +66,7 @@ public class CharProperty : MonoBehaviour
     public Slider myMpBar = null;
     public Slider myExpBar = null;
     float _hp = 0.0f;
-    protected float curHP
+    public float curHP
     {
         get => _hp;
         set

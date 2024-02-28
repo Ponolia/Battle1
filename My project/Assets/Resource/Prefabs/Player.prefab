@@ -794,13 +794,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27e1e46600e03b04ebda8e850f6f79b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clickMask:
+  movekMask:
     serializedVersion: 2
     m_Bits: 8
+  objMask:
+    serializedVersion: 2
+    m_Bits: 24576
   attackMask:
     serializedVersion: 2
     m_Bits: 128
-  clickAct:
+  moveAct:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 389123163334609435}
@@ -821,6 +824,21 @@ MonoBehaviour:
       - m_Target: {fileID: 389123163334609435}
         m_TargetAssemblyTypeName: PlayerCon, Assembly-CSharp
         m_MethodName: SetTarget
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  objAct:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 389123163334609435}
+        m_TargetAssemblyTypeName: PlayerCon, Assembly-CSharp
+        m_MethodName: OnActiveObj
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -870,7 +888,7 @@ MonoBehaviour:
     WSkill: {fileID: 11400000, guid: a1ea439c019663b479f6396006c4b731, type: 2}
     ESkill: {fileID: 11400000, guid: 73c9bf5d9541c6a4292cad19db9dff4b, type: 2}
     RSkill: {fileID: 11400000, guid: 74501b48350150e448375b451ce58ee7, type: 2}
-  myWeaponPos: {fileID: 244350671049458287}
+  attackArea: {fileID: 0}
   attackMask:
     serializedVersion: 2
     m_Bits: 128
@@ -1376,7 +1394,7 @@ GameObject:
   - component: {fileID: 9167085853989029158}
   - component: {fileID: 3212967997869538734}
   - component: {fileID: 4967834100355074054}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: VirtualGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2386,6 +2404,15 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  AttackAct2:
+    m_PersistentCalls:
+      m_Calls: []
+  AttackAct3:
+    m_PersistentCalls:
+      m_Calls: []
+  AttackAct4:
+    m_PersistentCalls:
+      m_Calls: []
   DeadAct:
     m_PersistentCalls:
       m_Calls: []

@@ -5,6 +5,8 @@ using UnityEngine;
 public class FollowCam : MonoBehaviour
 {
     public Transform followTarget = null;
+
+    public Vector3 cameraPos = new Vector3(0.0f, 10.0f, -5.0f);
     public float smoothMoveSpeed = 10.0f;
     public float zoomSpeed = 3.0f;
     public Vector2 zoomRange = new Vector2(5.0f, 10.0f);
@@ -31,4 +33,16 @@ public class FollowCam : MonoBehaviour
 
         transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * smoothMoveSpeed);
     }
+    public void SetTarget(Transform target)
+    {
+        transform.position = target.position + cameraPos;
+        transform.LookAt(target);
+        myDist = cameraPos.magnitude;
+        myDir = cameraPos.normalized;
+
+        targetPosition = transform.position;
+
+        followTarget = target;
+    }
 }
+

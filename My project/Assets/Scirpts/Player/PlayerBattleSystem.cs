@@ -27,6 +27,7 @@ public class SkillInfo
 
 public class PlayerBattleSystem : BattleSystem
 {
+    public bool CanMove { get; set; } = true;
     protected enum SkillKey
     {
         QSkill,
@@ -205,5 +206,37 @@ public class PlayerBattleSystem : BattleSystem
             usingSkill.skill.SkillAttack(curAttackPoint, UsingSkill.skillLV, transform, enemyMask);
             yield return t;
         }
+    }
+    public GameObject levelUpEffect;
+    public void LevelUp()
+    {
+        levelUpEffect.SetActive(true);
+
+        battleStat.LV++;
+        battleStat.MaxExp += 100;
+        curExp = 0;
+        battleStat.MaxHpPoint += 20;
+        curHP += 20;
+        battleStat.MaxMpPoint += 20;
+        curMP += 20;
+        curAttackPoint += 3;
+        curDefensePoint += 3;
+
+        SkillPoint += 3;
+        GameManager.Inst.UiManager.mySkillWindow.ChangeInfo();
+    }
+    void PlayerDead()
+    {
+        CanMove = false;
+        myAnim.SetTrigger("Die");
+        myAnim.SetBool("IsImmunity", true);
+    }
+
+    public void PlayerRespawn()
+    {
+        curHP = battleStat.MaxHpPoint;
+        CanMove = true;
+        myAnim.Play("Idle");
+        myAnim.SetBool("IsImmunity", false);
     }
 }
