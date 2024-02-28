@@ -37,10 +37,10 @@ public class Monster : AIMoveMent
                 myTarget = myPerception.myTarget;
                 AttackTarget(myPerception.myTarget);
                 break;
-            case State.Dead:
-                // myCol.enabled = false;
+            case State.Dead:            
                 StopAllCoroutines();
                 DisAppear();
+              //  myCol.enabled = false;
 
                 break;
         }
@@ -79,14 +79,20 @@ public class Monster : AIMoveMent
 
     void OnEnable()
     {
+        OnReset();
+    }
+
+    public void OnReset()
+    {
         Initialize();
 
-        hpBarObj = Instantiate(Resources.Load("UI\\EnemyHpBar") as GameObject,
-            GameObject.Find("DynamicCanvas").transform.GetChild(0));
-        myHpBar = hpBarObj.GetComponent<Slider>();
-        hpBarObj.GetComponent<EnemyHPBar>().SetTarget(transform);
+        //hpBarObj = Instantiate(Resources.Load("UI\\EnemyHpBar") as GameObject,
+        //    GameObject.Find("DynamicCanvas").transform.GetChild(0));
+        //myHpBar = hpBarObj.GetComponent<Slider>();
+        //hpBarObj.GetComponent<EnemyHPBar>().SetTarget(transform);
         StartCoroutine(StartDelaying(2.0f));
     }
+
     IEnumerator StartDelaying(float t)
     {
         yield return new WaitForSeconds(t);

@@ -16,5 +16,6 @@ public class EnemySpawner : MonoBehaviour
 
         enemy.Respawn();
         enemy.gameObject.SetActive(true);
+        enemy.OnReset();
     }
 }
