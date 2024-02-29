@@ -2339,13 +2339,13 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1117557679}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 1117557681}
+        m_TargetAssemblyTypeName: Option, Assembly-CSharp
+        m_MethodName: OnEffectAudioVolume
+        m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -4397,7 +4397,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1820729794}
+      - m_Target: {fileID: 2030228397}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -5577,7 +5577,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4de6d640ecd9354e986ac8c34c375b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myBackgroundSound: []
+  myBackgroundSound:
+  - {fileID: 8300000, guid: a652877b012108e41871f867ada9f176, type: 3}
+  - {fileID: 8300000, guid: 1d74880bed4586644a16a79a2d9dc8af, type: 3}
+  - {fileID: 8300000, guid: f1cb5d83282f2904a85f73111d068616, type: 3}
+  - {fileID: 8300000, guid: 1eb7cbaf61d23a64bbd36c0a38b5cb0c, type: 3}
+  - {fileID: 8300000, guid: c91fcf414acc0344cb03b13996f1bf3b, type: 3}
+  - {fileID: 8300000, guid: b7f8695cf65a4f24eb37544298821146, type: 3}
+  - {fileID: 8300000, guid: d1afd3f4d23c24f418ffc315afb04965, type: 3}
+  - {fileID: 8300000, guid: 83829ff414f47a048b5387e4ab33571c, type: 3}
   myBackGroundSource: {fileID: 0}
   myEffectSource: {fileID: 0}
   myUiSource: {fileID: 0}
@@ -6525,13 +6533,13 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1117557679}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 1117557681}
+        m_TargetAssemblyTypeName: Option, Assembly-CSharp
+        m_MethodName: OnBackGroundAudioVolume
+        m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

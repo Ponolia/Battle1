@@ -13,6 +13,8 @@ public class FollowCam : MonoBehaviour
     Vector3 myDir = Vector3.zero;
     float myDist = 0.0f;
 
+  //  Renderer obstacleRenderer;
+
     Vector3 targetPosition = Vector3.zero;
     // Start is called before the first frame update
     void Start()
@@ -32,6 +34,32 @@ public class FollowCam : MonoBehaviour
         targetPosition = followTarget.position + myDir * myDist;
 
         transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * smoothMoveSpeed);
+    }
+    private void LateUpdate()
+    {
+        float Distance = Vector3.Distance(transform.position, followTarget.transform.position);
+
+        Vector3 Direction = (followTarget.transform.position - transform.position).normalized;
+
+        RaycastHit hit;
+
+        Debug.DrawRay(transform.position, Direction * Distance, Color.red);
+
+        if (Physics.Raycast(transform.position, Direction, out hit, Distance))
+
+        {
+            Renderer obstacleRenderer = hit.transform.gameObject.GetComponentInChildren<Renderer>();
+            if (obstacleRenderer != null)
+            {
+                Material Mat = obstacleRenderer.material;
+
+                Color matColor = Mat.color;
+
+                matColor.a = 0.1f;
+
+                Mat.color = matColor;
+            }
+        }
     }
     public void SetTarget(Transform target)
     {

@@ -22,7 +22,6 @@ public class PlayerCon : PlayerBattleSystem
         Initialize();
     }
 
-
     void Update()
     {
         // 기본 공격
@@ -71,7 +70,6 @@ public class PlayerCon : PlayerBattleSystem
     public void OnActiveObj(Transform target)
     {
         target.GetComponent<Teleport>().Enter(this);
-        //target.GetComponent<Shop>().Enter(this);
     }
     public void OnEquipItem(Item EquipmentItem)
     {
@@ -193,7 +191,7 @@ public class PlayerCon : PlayerBattleSystem
             }
             else
             {
-                //curMP += Item.StatPoint;
+                curMP += Item.StatPoint;
             }
         }
     }

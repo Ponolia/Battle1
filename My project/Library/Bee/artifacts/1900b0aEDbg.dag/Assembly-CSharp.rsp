@@ -401,6 +401,7 @@
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2023.2.6f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.UIToolkit.SourceGenerator.dll"
 "Assets/etc/LevelUpText.cs"
 "Assets/etc/LoadingText.cs"
+"Assets/Map/L_FG_Assets_Pack_Lite/Demo/cameraMove.cs"
 "Assets/MoveMenu.cs"
 "Assets/Particle/UnityTechnologies/EffectExamples/Misc Effects/Scripts/SpawnEffect.cs"
 "Assets/Scirpts/AIPerception.cs"
@@ -464,6 +465,7 @@
 "Assets/Scirpts/UI/SkillUISlot.cs"
 "Assets/Scirpts/UI/UIProperty.cs"
 "Assets/Scirpts/UIObject.cs"
+"Assets/TransObject.cs"
 "Assets/UI/Sci-Fi UI/Demo_Assets/scripts/GUI_Demo.cs"
 -langversion:9.0
 
