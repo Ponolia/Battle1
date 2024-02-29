@@ -449,6 +449,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   followTarget: {fileID: 1948935291}
+  cameraPos: {x: 0, y: 10, z: -5}
   smoothMoveSpeed: 10
   zoomSpeed: 3
   zoomRange: {x: 5, y: 10}

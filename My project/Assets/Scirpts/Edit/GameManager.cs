@@ -126,29 +126,29 @@ public class GameManager : Singleton<GameManager>
         FadeOut(() => sceneLoader.LoadScene(sceneNum, 0));
         //sceneLoader.LoadScene(2, 0);
     }
-    //public void StartLoadGame(int saveSlotNum)
-    //{
-    //    SaveData saveData = inGameManager.saveDatas[saveSlotNum];
+    public void StartLoadGame(int saveSlotNum)
+    {
+        SaveData saveData = inGameManager.saveDatas[saveSlotNum];
 
-    //    inGameManager.curSaveSlotNum = saveSlotNum;
-    //    if (saveData.IsEmpty)
-    //    {
-    //        curSceneNum = 2;
-    //        FadeOut(() => sceneLoader.LoadScene(curSceneNum, 0));
+        inGameManager.curSaveSlotNum = saveSlotNum;
+        if (saveData.IsEmpty)
+        {
+            curSceneNum = 2;
+            FadeOut(() => sceneLoader.LoadScene(curSceneNum, 0));
 
-    //        //퀘스트 초기화
-    //        questManager.InitQuestDatabase(saveSlotNum);
-    //        questManager.ResetQuestData();
-    //    }
-    //    else
-    //    {
-    //        curSceneNum = saveData.playerInfo.SceneNum;
-    //        FadeOut(() => sceneLoader.LoadScene(curSceneNum, -1));
+            //퀘스트 초기화
+            //questManager.InitQuestDatabase(saveSlotNum);
+            //questManager.ResetQuestData();
+        }
+        else
+        {
+            curSceneNum = saveData.playerInfo.SceneNum;
+            FadeOut(() => sceneLoader.LoadScene(curSceneNum, -1));
 
-    //        //퀘스트 초기화
-    //        questManager.InitQuestDatabase(saveSlotNum);
-    //    }
-    //}
+            //퀘스트 초기화
+           // questManager.InitQuestDatabase(saveSlotNum);
+        }
+    }
     public void MapChange(int sceneNum, int spawnPointNum)
     {
       //  inGameManager.Save();
