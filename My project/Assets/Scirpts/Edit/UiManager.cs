@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class UiManager : MonoBehaviour
 {
     public Slider myHpSlider;
+    public Slider myMpSlider;
     public Slider myExpSlider;
 
     public Inventory myInventory;
