@@ -35,7 +35,7 @@ public class Monster : AIMoveMent
             case State.Battle:
                 StopAllCoroutines();
                 myTarget = myPerception.myTarget;
-                AttackTarget(myPerception.myTarget);
+                AttackTargeting(myPerception.myTarget);
                 break;
             case State.Dead:            
                 StopAllCoroutines();

@@ -57,7 +57,6 @@ public class BattleSystem : PlayerMove, IDamage, ILive
         //    attackVec.Normalize();
         //    if (damage != null) damage.OnDamage(dmg);
         //}
-
     }
     public virtual void OnDamage(float dmg)
     {

@@ -24,13 +24,6 @@ public class PlayerCon : PlayerBattleSystem
 
     void Update()
     {
-        // 기본 공격
-        //if (Input.GetMouseButtonDown(0) && !myAnim.GetBool("IsAttack")
-        //            && !EventSystem.current.IsPointerOverGameObject())
-        //{
-           
-        //    myAnim.SetBool("Attack", true);
-        //}
         // 스킬 애니
         if (Input.GetKeyDown(KeyCode.Q) && !myAnim.GetBool("IsAttack"))
         {
@@ -139,9 +132,7 @@ public class PlayerCon : PlayerBattleSystem
                     }
                 }
                 break;
-
         }
-
     }
     public void EquipmentOvjectDisabled(Item item)
     {
@@ -195,7 +186,6 @@ public class PlayerCon : PlayerBattleSystem
             }
         }
     }
-
     public void SetStatus(TMPro.TMP_Text[] statList)
     {
         statList[0].text = battleStat.LV.ToString();
@@ -204,5 +194,4 @@ public class PlayerCon : PlayerBattleSystem
         statList[3].text = curAttackPoint.ToString();
         statList[4].text = curDefensePoint.ToString();
     }
-
 }

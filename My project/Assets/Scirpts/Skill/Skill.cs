@@ -56,8 +56,8 @@ public class Skill : ScriptableObject
    // ============ 각 스킬의 피해 판정 함수 ===========================
     public void SwordSkill_1(float dmg, Transform transform, LayerMask enemyMask)
     {
-        BattleManager.AttackCircle(transform.position, 2.0f, enemyMask, dmg
-           ,false, 0.1f);
+        BattleManager.AttackDirCircle(transform.position, 1.0f, enemyMask, dmg
+           ,transform.up, false, 2.0f);
     }
     public void SwordSkill_2(float dmg, Transform transform, LayerMask enemyMask)
     {

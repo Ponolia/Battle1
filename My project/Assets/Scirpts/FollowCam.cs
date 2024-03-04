@@ -16,6 +16,8 @@ public class FollowCam : MonoBehaviour
   //  Renderer obstacleRenderer;
 
     Vector3 targetPosition = Vector3.zero;
+
+    List<Material> alphalist = new List<Material>();
     // Start is called before the first frame update
     void Start()
     {
@@ -37,13 +39,14 @@ public class FollowCam : MonoBehaviour
     }
     private void LateUpdate()
     {
+        
         float Distance = Vector3.Distance(transform.position, followTarget.transform.position);
 
         Vector3 Direction = (followTarget.transform.position - transform.position).normalized;
 
         RaycastHit hit;
 
-        Debug.DrawRay(transform.position, Direction * Distance, Color.red);
+        Debug.DrawRay(transform.position, Direction * Distance, Color.red);        
 
         if (Physics.Raycast(transform.position, Direction, out hit, Distance))
 
@@ -53,14 +56,29 @@ public class FollowCam : MonoBehaviour
             {
                 Material Mat = obstacleRenderer.material;
 
-                Color matColor = Mat.color;
+                if (!alphalist.Contains(Mat))
+                {
+                    Color matColor = Mat.color;
 
-                matColor.a = 0.1f;
+                    matColor.a = 0.1f;
 
-                Mat.color = matColor;
+                    Mat.color = matColor;
+                    alphalist.Add(Mat);
+                }
             }
+        }        
+        else
+        {
+            foreach(Material mat in alphalist)
+            {
+                Color color = mat.color;
+                color.a = 1.0f;
+                mat.color = color;
+            }
+            alphalist.Clear();
         }
-    }
+    }    
+
     public void SetTarget(Transform target)
     {
         transform.position = target.position + cameraPos;

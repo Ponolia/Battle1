@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 21300000, guid: 2d089513ae4adfc48a683c362ad9992c, type: 3}
   animationClip: {fileID: 7400000, guid: b9fbf42171648a74b90d3cdad6978f51, type: 2}
-  EffectPrefab: {fileID: 0}
+  EffectPrefab: {fileID: 2965222256817593503, guid: aa254eabe0a6dce42881a96794d2d6f8, type: 3}
   IsAreaSelect: 0
   AreaPrefab: {fileID: 0}
   damageArea:

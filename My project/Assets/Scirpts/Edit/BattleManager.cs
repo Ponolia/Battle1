@@ -5,7 +5,6 @@ using TMPro;
 
 public class BattleManager : MonoBehaviour
 {
-
     static Vector3 originPos = Vector3.zero;
     static float originSize = 0f;
     public static void AttackDirCircle(Vector3 pos, float size, LayerMask enemyMask, float dmg,
@@ -17,7 +16,6 @@ public class BattleManager : MonoBehaviour
             IDamage damage = col.GetComponent<IDamage>();
             if (damage != null) damage.OnDamage(dmg);//, attackVec, knockBackDist, isDown
         }
-
         //Gizmo test¿ë
         originPos = pos;
         originSize = size;
@@ -34,7 +32,6 @@ public class BattleManager : MonoBehaviour
             attackVec.Normalize();
             if (damage != null) damage.OnDamage(dmg);//, attackVec, knockBackDist, isDown
         }
-
         //Gizmo test¿ë
         originPos = pos;
         originSize = size;
