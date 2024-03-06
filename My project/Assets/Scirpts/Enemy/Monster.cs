@@ -34,8 +34,8 @@ public class Monster : AIMoveMent
                 break;
             case State.Battle:
                 StopAllCoroutines();
-                myTarget = myPerception.myTarget;
-                AttackTargeting(myPerception.myTarget);
+               // myTarget = myPerception.myTarget;
+                AttackTarget(myPerception.myTarget);
                 break;
             case State.Dead:            
                 StopAllCoroutines();
@@ -61,14 +61,19 @@ public class Monster : AIMoveMent
                 break;
         }
     }
-    public override void OnDamage(float dmg)
+    public override void OnDamage(float dmg, Vector3 attackVec, float knockBackDist, bool isDown)
     {
-        curHP -= dmg;
-        if (myPerception.myTarget != null)
+        ////curHP -= dmg;
+        if (myTarget == null) myTarget = myPerception.myTarget;
+        // GameManager.Inst.inGameManager.myPlayer.transform;
+        ChangeState(State.Battle);
+        
+        base.OnDamage(dmg, attackVec, knockBackDist, isDown);
+
+        if (!IsLive)
         {
-            ChangeState(State.Battle);
+            ChangeState(State.Dead);
         }
-        base.OnDamage(dmg);
     }
     void Awake()
     {
@@ -86,10 +91,10 @@ public class Monster : AIMoveMent
     {
         Initialize();
 
-        //hpBarObj = Instantiate(Resources.Load("UI\\EnemyHpBar") as GameObject,
-        //    GameObject.Find("DynamicCanvas").transform.GetChild(0));
-        //myHpBar = hpBarObj.GetComponent<Slider>();
-        //hpBarObj.GetComponent<EnemyHPBar>().SetTarget(transform);
+        hpBarObj = Instantiate(Resources.Load("UI\\EnemyHpBar") as GameObject,
+            GameObject.Find("DynamicCanvas").transform.GetChild(0));
+        myHpBar = hpBarObj.GetComponent<Slider>();
+        hpBarObj.GetComponent<EnemyHPBar>().SetTarget(transform);
         StartCoroutine(StartDelaying(2.0f));
     }
 

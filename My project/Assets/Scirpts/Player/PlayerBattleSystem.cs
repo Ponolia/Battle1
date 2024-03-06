@@ -101,7 +101,6 @@ public class PlayerBattleSystem : BattleSystem
         }
         if (skillInfo.curSkillCool > 0.0f)
         {
-
             //Debug.Log($"해당 스킬이 쿨타임 중 입니다. 남은 쿨타임 : {skillInfo.curSkillCool}");
             return;
         }
@@ -205,6 +204,19 @@ public class PlayerBattleSystem : BattleSystem
         {
             usingSkill.skill.SkillAttack(curAttackPoint, UsingSkill.skillLV, transform, enemyMask);
             yield return t;
+        }
+    }
+    public override void OnDamage(float dmg, Vector3 attackVec, float knockBackDist, bool isDown)
+    {
+        if (!myAnim.GetBool("IsImmunity"))
+        {
+            base.OnDamage(dmg, attackVec, knockBackDist, isDown);
+            if (!IsLive)
+            {
+                //Game Over
+                GameManager.Inst.GameOver();
+                PlayerDead();
+            }
         }
     }
     public GameObject levelUpEffect;

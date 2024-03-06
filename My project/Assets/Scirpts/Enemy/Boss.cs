@@ -16,40 +16,40 @@ public class Boss : BattleSystem
 
     }
 
-    public override void OnDamage(float dmg)
+    public override void OnDamage(float dmg, Vector3 attackVec, float knockBackDist, bool isDown)
     {
         //보스 몬스터는 데미지만
         float damage = dmg - curDefensePoint;
         damage = damage <= 1 ? 1 : damage;
         curHP -= damage;
 
-      //  BattleManager.DamagePopup(transform, damage);
+     //   BattleManager.DamagePopup(transform, damage);
 
-        //if (!IsLive)
-        //{
-        //    //보스 죽음, 클리어
-        //    //보스 죽는 애니메이션
-        //    //HP바 없애기
-        //    //컷씬 후, 아이템 드랍, 맵 막힌곳 열림, 출구 생김
-        //    StopAllCoroutines();
-        //    StartCoroutine(StartDeadCoroutine());
-        //}
+        if (!IsLive)
+        {
+            //보스 죽음, 클리어
+            //보스 죽는 애니메이션
+            //HP바 없애기
+            //컷씬 후, 아이템 드랍, 맵 막힌곳 열림, 출구 생김
+            StopAllCoroutines();
+            StartCoroutine(StartDeadCoroutine());
+        }
     }
-    //IEnumerator StartDeadCoroutine()
-    //{
-    //    myAnim.SetTrigger("Die");
-    //    GetComponent<Collider>().enabled = false;
+    IEnumerator StartDeadCoroutine()
+    {
+        myAnim.SetTrigger("Die");
+        GetComponent<Collider>().enabled = false;
 
-    //    yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(2.0f);
 
-    //    GameManager.Inst.UiManager.myBossHpBar.SetActive(false);
-    //    DropExp(BattleStat.MaxExp);
-    //    //DropItem();
-    //    exitPortal.SetActive(true);
+        GameManager.Inst.UiManager.myBossHpBar.SetActive(false);
+        DropExp(battleStat.MaxExp);
+        //DropItem();
+       // exitPortal.SetActive(true);
 
-    //    //퀘스트 진행
-    //    GameManager.Inst.questManager.ProcessQuest(QuestType.DestroyEnemy, ID);
-    //}
+        ////퀘스트 진행
+        //GameManager.Inst.questManager.ProcessQuest(QuestType.DestroyEnemy, ID);
+    }
     //public void DropItem()
     //{
     //    GameObject obj = Instantiate(Resources.Load("DropItem") as GameObject);
@@ -65,14 +65,14 @@ public class Boss : BattleSystem
     public void OnEndCutScene()
     {
         myAnim.SetBool("CanMove", true);
-        AttackTarget(myTarget);
+        AttackTargets(myTarget);
 
         //HP바 생성
         //GameManager.Inst.UiManager.myBossHpBar.SetActive(true);
     }
 
     //이동 및 공격
-    void AttackTarget(Transform target)
+    void AttackTargets(Transform target)
     {
         if (target != null)
             StartCoroutine(Attacking(target));

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public interface IDamage
 {
-    void OnDamage(float damage);
+    void OnDamage(float dmg, Vector3 attackVec, float knockBackDist, bool isDown);
 }
 
 public interface ILive
@@ -24,13 +24,18 @@ public struct BattleStat
     public float DefensePoint;
     public float AttackRange;
     public float AttackDelay;
+    public float AttackSize;
 }
-public class BattleSystem : PlayerMove, IDamage, ILive
+public class BattleSystem : MoveMent, IDamage, ILive
 {
-    protected Transform myTarget = null;
+    public List<Item> myItem;
+    [SerializeField] Transform myAttackArea = null;
+   
     [SerializeField] protected LayerMask enemyMask;
+    protected Transform myTarget = null;
     protected virtual void Initialize() 
     {
+       
         curHP = battleStat.MaxHpPoint;
         curMP = battleStat.MaxMpPoint;
         curExp = 0;
@@ -45,49 +50,91 @@ public class BattleSystem : PlayerMove, IDamage, ILive
             return curHP > 0.0f;
         }
     }
+    public bool IsLvUP
+    {
+        get
+        {
+            return curExp >= battleStat.MaxExp;
+        }
+    }
     public virtual void OnAttack() 
     {
-        IDamage damage = myTarget.GetComponent<IDamage>();
-        if (damage != null) damage.OnDamage(battleStat.AttackPoint);
-        //Collider[] myCols = Physics.OverlapSphere(pos, size, enemyMask);
-        //foreach (Collider col in myCols)
-        //{
-        //    IDamage damage = col.GetComponent<IDamage>();
-        //    Vector3 attackVec = col.transform.position - pos;
-        //    attackVec.Normalize();
-        //    if (damage != null) damage.OnDamage(dmg);
-        //}
+        BattleManager.AttackDirCircle(myAttackArea.position,
+             battleStat.AttackSize,
+             enemyMask,
+             curAttackPoint,
+             transform.forward,
+             false, 0.5f);
     }
-    public virtual void OnDamage(float dmg)
+    public virtual void OnDamage(float dmg, Vector3 attackVec, float knockBackDist, bool isDown)
     {
-        curHP -= dmg;
-        if (curHP > 0.0f)
+        float damage = dmg - curDefensePoint;
+        damage = damage <= 1 ? 1 : damage;
+        curHP -= damage;
+        if (!isDown)
         {
-            myAnim.SetTrigger("Hit");
-            StartCoroutine(DamagingEff(0.3f));
+            
+            OnCharStagger();
         }
         else
         {
-            OnDead();
-            myAnim.SetTrigger("Die");
+            
+            OnCharDown();
         }
+        KnockBack(attackVec, knockBackDist);
+        BattleManager.DamagePopup(transform, damage);
+    }
+    protected virtual void OnCharStagger()
+    {
+        StopMove();
+        //myAnim.SetTrigger("Damaged");
+        myAnim.Play("Damaged", -1, 0f);
+
     }
     protected virtual void OnDead()
     {
 
     }
-    IEnumerator DamagingEff(float t)
+    protected virtual void OnCharDown()
     {
-        foreach (Renderer render in myAllRenders)
-        {
-            render.material.color = Color.red;
-        }
 
-        yield return new WaitForSeconds(t);
+    }
+    void KnockBack(Vector3 attackVec, float knockBackDist)
+    {
+        transform.forward = -attackVec;
+        //transform.Translate(attackVec * knockBackDist, Space.World);
+        StartCoroutine(Moving(attackVec * knockBackDist));
+    }
+    IEnumerator Moving(Vector3 dir)
+    {
+        float dist = dir.magnitude;
+        dir.Normalize();
 
-        foreach (Renderer render in myAllRenders)
+        while (dist > 0.0f)
         {
-            render.material.color = Color.white;
+            float delta = Time.deltaTime * 30.0f;   //�˹� �ӵ� �ϴ� ����. 30.0f
+            if (delta > dist) delta = dist;
+            dist -= delta;
+
+            transform.Translate(dir * delta, Space.World);
+
+            if (UnityEngine.AI.NavMesh.SamplePosition(transform.position, out UnityEngine.AI.NavMeshHit hit, 5.0f, UnityEngine.AI.NavMesh.AllAreas))
+            {
+                transform.position = hit.position;
+            }
+            yield return null;
         }
     }
+    public void DropExp(int Exp)
+    {
+        //int Exp = Random.Range(50, 101);
+        GameManager.Inst.inGameManager.myPlayer.curExp += Exp;
+        if (GameManager.Inst.inGameManager.myPlayer.IsLvUP)
+        {
+            int less = (int)(curExp - battleStat.MaxExp);
+            GameManager.Inst.inGameManager.myPlayer.LevelUp();
+            GameManager.Inst.inGameManager.myPlayer.curExp += less;
+        }
+    }
+    
 }

@@ -6,7 +6,8 @@ using UnityEngine.EventSystems;
 
 public class PlayerCon : PlayerBattleSystem
 {
-    public Transform attackArea;
+    public Item PickUpItem = null;
+
     public LayerMask attackMask;
     public UnityEvent<Transform> attackAct;
 
@@ -17,29 +18,39 @@ public class PlayerCon : PlayerBattleSystem
     public GameObject BootsObject = null;
     public GameObject HelmetObject = null;
 
+    GameObject destinationMarker;
+
     void Start()
     {
+        destinationMarker = Resources.Load<GameObject>("destinationMarker");
         Initialize();
+
+        //GameObject miniMapIcon = Instantiate(Resources.Load<GameObject>("UI\\MiniMapIcon"),
+        //  GameManager.Inst.UiManager.myMiniMapIcons);
+        //miniMapIcon.GetComponent<MiniMapIcon>().SetTarget(transform, Color.green);
     }
 
     void Update()
     {
-        // 스킬 애니
-        if (Input.GetKeyDown(KeyCode.Q) && !myAnim.GetBool("IsAttack"))
+        if (CanMove)
         {
-            UseSkill(SkillKey.QSkill);
-        }
-        if (Input.GetKeyDown(KeyCode.W) && !myAnim.GetBool("IsAttack"))
-        {
-            UseSkill(SkillKey.WSkill);
-        }
-        if (Input.GetKeyDown(KeyCode.E) && !myAnim.GetBool("IsAttack"))
-        {
-            UseSkill(SkillKey.ESkill);
-        }
-        if (Input.GetKeyDown(KeyCode.R) && !myAnim.GetBool("IsAttack"))
-        {
-            UseSkill(SkillKey.RSkill);
+            // 스킬 애니
+            if (Input.GetKeyDown(KeyCode.Q) && !myAnim.GetBool("IsAttack"))
+            {
+                UseSkill(SkillKey.QSkill);
+            }
+            if (Input.GetKeyDown(KeyCode.W) && !myAnim.GetBool("IsAttack"))
+            {
+                UseSkill(SkillKey.WSkill);
+            }
+            if (Input.GetKeyDown(KeyCode.E) && !myAnim.GetBool("IsAttack"))
+            {
+                UseSkill(SkillKey.ESkill);
+            }
+            if (Input.GetKeyDown(KeyCode.R) && !myAnim.GetBool("IsAttack"))
+            {
+                UseSkill(SkillKey.RSkill);
+            }
         }
     }
     public void SetTarget(Transform target)
@@ -55,15 +66,14 @@ public class PlayerCon : PlayerBattleSystem
     {
         return equippedSkills;
     }
-    public override void OnDamage(float dmg)
-    {       
-        base.OnDamage(dmg);
-    }
 
+    // 상점, 맵이동 오브젝트 클릭
     public void OnActiveObj(Transform target)
     {
         target.GetComponent<Teleport>().Enter(this);
     }
+
+
     public void OnEquipItem(Item EquipmentItem)
     {
         if (EquipmentItem != null)
@@ -94,6 +104,7 @@ public class PlayerCon : PlayerBattleSystem
         }
         EquipmentOvjectDisabled(EquipmentItem);
     }
+
     public void EquipmentOvjectActivate(Item item)
     {
         switch (item.EquipmentType)
@@ -171,7 +182,6 @@ public class PlayerCon : PlayerBattleSystem
                 break;
         }
     }
-
     public void OnUsePotion(Item Item)
     {
         if (Item != null)

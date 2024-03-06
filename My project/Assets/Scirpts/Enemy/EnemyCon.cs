@@ -15,7 +15,7 @@ public class EnemyCon : AIMoveMent
     public State myState = State.Create;
 
     Vector3 startPos = Vector3.zero;
-   
+
     GameObject hpBarObj = null;
     void ChangeState(State s)
     {
@@ -43,10 +43,8 @@ public class EnemyCon : AIMoveMent
                 // AttackTarget(myPerception.myTarget);
                 break;
             case State.Dead:
-                // myCol.enabled = false;
                 StopAllCoroutines();
-                DisAppear();
-
+                StartCoroutine(StartDeadCoroutine());
                 break;
         }
     }
@@ -86,14 +84,23 @@ public class EnemyCon : AIMoveMent
     {
         StateProcess();
     }
-    public override void OnDamage(float dmg)
+    public override void OnDamage(float dmg, Vector3 attackVec, float knockBackDist, bool isDown)
     {
-        curHP -= dmg;
-        if (myPerception.myTarget != null)
+        //보스 몬스터는 데미지만
+        float damage = dmg - curDefensePoint;
+        damage = damage <= 1 ? 1 : damage;
+        curHP -= damage;
+
+        //   BattleManager.DamagePopup(transform, damage);
+
+        if (!IsLive)
         {
-            ChangeState(State.Battle);
+            //보스 죽음, 클리어
+            //보스 죽는 애니메이션
+            //HP바 없애기
+            //컷씬 후, 아이템 드랍
+            ChangeState(State.Dead);
         }
-        base.OnDamage(dmg);
     }
     public void FindEnemy()
     {
@@ -110,11 +117,11 @@ public class EnemyCon : AIMoveMent
     {
         ChangeState(State.Dead);
     }
-    public void DisAppear()
-    {
-        Destroy(hpBarObj);
-        StartCoroutine(DisAppearing(0.5f, 2.0f));
-    }
+    //public void DisAppear()
+    //{
+    //    Destroy(hpBarObj);
+    //    StartCoroutine(DisAppearing(0.5f, 2.0f));
+    //}
     IEnumerator DisAppearing(float speed, float t)
     {
         yield return new WaitForSeconds(t);
@@ -187,19 +194,19 @@ public class EnemyCon : AIMoveMent
         {
             case 1:
                 myAnim.SetTrigger("Attack");
-                
+
                 break;
             case 2:
                 myAnim.SetTrigger("Attack1");
-                
+
                 break;
             case 3:
                 myAnim.SetTrigger("Attack2");
-                
+
                 break;
             case 4:
                 myAnim.SetTrigger("Attack3");
-                
+
                 break;
         }
     }
@@ -224,5 +231,15 @@ public class EnemyCon : AIMoveMent
         BattleManager.AttackCircle(transform.position, 5.0f, enemyMask, 40.0f,
             false, 4.0f);
     }
+    IEnumerator StartDeadCoroutine()
+    {
+        myAnim.SetTrigger("Die");
+        GetComponent<Collider>().enabled = false;
 
+        yield return new WaitForSeconds(2.0f);
+
+        GameManager.Inst.UiManager.myBossHpBar.SetActive(false);
+        DropExp(battleStat.MaxExp);
+        // DropItem();
+    }
 }
