@@ -72,6 +72,12 @@ public class CharProperty : MonoBehaviour
         set
         {
             _hp = Mathf.Clamp(value, 0.0f, battleStat.MaxHpPoint);
+
+            if(gameObject.name == "Player")
+            {
+                int a = 0;
+            }
+
             if (myHpBar != null) myHpBar.value = _hp / battleStat.MaxHpPoint;
         }
     }

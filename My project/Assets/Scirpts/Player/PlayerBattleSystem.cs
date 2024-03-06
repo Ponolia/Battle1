@@ -214,8 +214,9 @@ public class PlayerBattleSystem : BattleSystem
             if (!IsLive)
             {
                 //Game Over
-                GameManager.Inst.GameOver();
                 PlayerDead();
+                GameManager.Inst.GameOver();
+                
             }
         }
     }

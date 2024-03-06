@@ -11,7 +11,7 @@ public class FireCtrl : MonoBehaviour
 
     private new AudioSource audio;
     private MeshRenderer muzzleFlash;
-    // Raycast 결과값 저장 구조체 선언
+    
     private RaycastHit hit;
     private void Start()
     {

@@ -67,7 +67,7 @@ public class BattleManager : MonoBehaviour
     }
     public static void DamagePopup(Transform transform, float dmg)
     {
-        GameObject obj = Instantiate(DmgPopupPrefab, DynamicCanvas.transform.GetChild(1));
+        GameObject obj = Instantiate(DmgPopupPrefab, DynamicCanvas.transform.GetChild(0));
         obj.GetComponent<TextMeshProUGUI>().text = dmg.ToString();
         obj.GetComponent<DamagePopup>().SetPos(transform);
     }

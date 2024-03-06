@@ -97,17 +97,17 @@ public class GameManager : Singleton<GameManager>
       //  inGameManager.Load(inGameManager.myPlayer);
 
         //-1이 아니면 해당 스폰포인트로 이동
-        if (spawnPointNum != -1)
-        {
-            //스폰 포인트로 플레이어 이동
-            spawnPoints = FindObjectOfType<PlayerSpawnPoints>();
-            if (spawnPoints != null)
-            {
-                inGameManager.myPlayer.transform.position =
-                    spawnPoints.spawnPoint[spawnPointNum].transform.position;
-            }
+        //if (spawnPointNum != -1)
+        //{
+        //    //스폰 포인트로 플레이어 이동
+        //    spawnPoints = FindObjectOfType<PlayerSpawnPoints>();
+        //    if (spawnPoints != null)
+        //    {
+        //        inGameManager.myPlayer.transform.position =
+        //            spawnPoints.spawnPoint[spawnPointNum].transform.position;
+        //    }
 
-        }
+        //}
       //  inGameManager.Save();
     }   /// <summary>
         /// 게임 종료하는 함수
@@ -172,14 +172,14 @@ public class GameManager : Singleton<GameManager>
     public void PlayerRespawn()
     {
         //스폰 포인트로 플레이어 이동
-        spawnPoints = FindObjectOfType<PlayerSpawnPoints>();
-        if (spawnPoints != null)
-        {
-            inGameManager.myPlayer.transform.position =
-                spawnPoints.spawnPoint[0].transform.position;
-        }
-        inGameManager.myPlayer.PlayerRespawn();
-        inGameManager.Save();
+        //spawnPoints = FindObjectOfType<PlayerSpawnPoints>();
+        //if (spawnPoints != null)
+        //{
+        //    inGameManager.myPlayer.transform.position =
+        //        spawnPoints.spawnPoint[0].transform.position;
+        //}
+        //inGameManager.myPlayer.PlayerRespawn();
+        //inGameManager.Save();
     }
 
 

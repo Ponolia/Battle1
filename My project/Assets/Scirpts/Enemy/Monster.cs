@@ -19,9 +19,11 @@ public class Monster : AIMoveMent
 
     Vector3 startPos = Vector3.zero;
     GameObject hpBarObj = null;
+
+
     void ChangeState(State s)
     {
-        if (myState == s || myState == State.Dead ) return;
+        if (myState == s || myState == State.Dead) return;
         myState = s;
         switch (myState)
         {
@@ -34,14 +36,14 @@ public class Monster : AIMoveMent
                 break;
             case State.Battle:
                 StopAllCoroutines();
-               // myTarget = myPerception.myTarget;
-                AttackTarget(myPerception.myTarget);
+                // myTarget = myPerception.myTarget;
+                AttackTargeting(myPerception.myTarget);
                 break;
-            case State.Dead:            
+            case State.Dead:
                 StopAllCoroutines();
+                myAnim.SetTrigger("Die");
                 DisAppear();
-              //  myCol.enabled = false;
-
+              // myCol.enabled = false;
                 break;
         }
     }
@@ -90,9 +92,9 @@ public class Monster : AIMoveMent
     public void OnReset()
     {
         Initialize();
-
+        GameObject res = Resources.Load<GameObject>("UI\\EnemyHpBar");
         hpBarObj = Instantiate(Resources.Load("UI\\EnemyHpBar") as GameObject,
-            GameObject.Find("DynamicCanvas").transform.GetChild(0));
+            GameObject.Find("DynamicCanvas").transform.GetChild(1));
         myHpBar = hpBarObj.GetComponent<Slider>();
         hpBarObj.GetComponent<EnemyHPBar>().SetTarget(transform);
         StartCoroutine(StartDelaying(2.0f));
@@ -123,7 +125,7 @@ public class Monster : AIMoveMent
     }
     public void DisAppear()
     {
-       // Destroy(hpBarObj);
+        Destroy(hpBarObj);
         StartCoroutine(DisAppearing(0.5f, 2.0f));
     }
     IEnumerator DisAppearing(float speed, float t)
@@ -153,6 +155,7 @@ public class Monster : AIMoveMent
         transform.position = startPos;
         myCol.enabled = true;
         myPerception.gameObject.SetActive(false);
+       myState = State.Normal;
         ChangeState(State.Create);
     }
 }

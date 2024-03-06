@@ -63,12 +63,13 @@ public class MoveMent : CharProperty
 
         while (!Mathf.Approximately(angle, 0.0f))
         {
-
-            float delta = rotSpeed * Time.deltaTime;
-            if (delta > angle) delta = angle;
-            angle -= delta;
-            transform.Rotate(Vector3.up * delta * rotDir);
-
+            if (!myAnim.GetBool("IsAttack"))
+            {
+                float delta = rotSpeed * Time.deltaTime;
+                if (delta > angle) delta = angle;
+                angle -= delta;
+                transform.Rotate(Vector3.up * delta * rotDir);
+            }
             yield return null;
         }
     }
@@ -87,10 +88,9 @@ public class MoveMent : CharProperty
             playTime += Time.deltaTime;
             Vector3 dir = target.position - transform.position;
             float dist = dir.magnitude - battleStat.AttackRange;
-            if (dist < 0.01f) dist = 0.0f;
+            if (dist < 0.2f) dist = 0.0f;
             dir.Normalize();
             
-
             float delta = moveSpeed * Time.deltaTime;
             
             if (!Mathf.Approximately(dist, 0.0f))
@@ -128,15 +128,15 @@ public class MoveMent : CharProperty
             yield return null;
         }
     }
-    protected void StopMove()
-    {
-        foreach (Coroutine co in moveCoroutineList)
-        {
-            if (co != null)
-            {
-                StopCoroutine(co);
-            }
-        }
-        moveCoroutineList.Clear();
-    }
+    //protected void StopMove()
+    //{
+    //    foreach (Coroutine co in moveCoroutineList)
+    //    {
+    //        if (co != null)
+    //        {
+    //            StopCoroutine(co);
+    //        }
+    //    }
+    //    moveCoroutineList.Clear();
+    //}
 }

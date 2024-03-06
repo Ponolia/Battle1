@@ -22,7 +22,7 @@ public class PlayerCon : PlayerBattleSystem
 
     void Start()
     {
-        destinationMarker = Resources.Load<GameObject>("destinationMarker");
+       // destinationMarker = Resources.Load<GameObject>("destinationMarker");
         Initialize();
 
         //GameObject miniMapIcon = Instantiate(Resources.Load<GameObject>("UI\\MiniMapIcon"),

@@ -34,14 +34,12 @@ public class BattleSystem : MoveMent, IDamage, ILive
     [SerializeField] protected LayerMask enemyMask;
     protected Transform myTarget = null;
     protected virtual void Initialize() 
-    {
-       
+    { 
         curHP = battleStat.MaxHpPoint;
         curMP = battleStat.MaxMpPoint;
         curExp = 0;
         curAttackPoint = battleStat.AttackPoint;
         curDefensePoint = battleStat.DefensePoint;
-
     }
     public bool IsLive
     {
@@ -73,12 +71,10 @@ public class BattleSystem : MoveMent, IDamage, ILive
         curHP -= damage;
         if (!isDown)
         {
-            
             OnCharStagger();
         }
         else
         {
-            
             OnCharDown();
         }
         KnockBack(attackVec, knockBackDist);
@@ -86,9 +82,9 @@ public class BattleSystem : MoveMent, IDamage, ILive
     }
     protected virtual void OnCharStagger()
     {
-        StopMove();
-        //myAnim.SetTrigger("Damaged");
-        myAnim.Play("Damaged", -1, 0f);
+       // StopMove();
+       myAnim.SetTrigger("Hit");
+        myAnim.Play("Hit", -1, 0f);
 
     }
     protected virtual void OnDead()
