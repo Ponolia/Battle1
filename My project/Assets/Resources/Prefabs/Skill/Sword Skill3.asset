@@ -33,11 +33,11 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   MultiDamage: 1
-  AddDamage: 1
-  CoolTime: 10
-  AttackCount: 2
+  AddDamage: 2
+  CoolTime: 15
+  AttackCount: 1
   AttackInterval: 0.2
-  KnockackDist: 0
+  KnockackDist: 1
   SkillSound: {fileID: 0}
   Range: 2
-  Duration: 2
+  Duration: 0

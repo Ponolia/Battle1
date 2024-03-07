@@ -208,8 +208,7 @@ public class PlayerBattleSystem : BattleSystem
     }
     public override void OnDamage(float dmg, Vector3 attackVec, float knockBackDist, bool isDown)
     {
-        if (!myAnim.GetBool("IsImmunity"))
-        {
+       
             base.OnDamage(dmg, attackVec, knockBackDist, isDown);
             if (!IsLive)
             {
@@ -218,7 +217,7 @@ public class PlayerBattleSystem : BattleSystem
                 GameManager.Inst.GameOver();
                 
             }
-        }
+        
     }
     public GameObject levelUpEffect;
     public void LevelUp()

@@ -11,7 +11,6 @@ public class MoveMent : CharProperty
     public LayerMask skillClickMask;
     public LayerMask virtualGroundMask;
 
-    List<Coroutine> moveCoroutineList = new List<Coroutine>();
 
     private void Update()
     {
@@ -34,8 +33,8 @@ public class MoveMent : CharProperty
        // dir.y = 0.0f;
         dir.Normalize();
 
-        moveCoroutineList.Add( StartCoroutine(Rotating(dir)));
-        while (dist > 0.1f)
+         StartCoroutine(Rotating(dir));
+        while (dist > 0.0f)
         {
             if (!myAnim.GetBool("IsAttack"))
             {
@@ -53,13 +52,12 @@ public class MoveMent : CharProperty
     }
     protected IEnumerator Rotating(Vector3 dir)
     {
-        dir.y = 0;
         float angle = Vector3.Angle(dir, transform.forward);
         float rotDir = 1.0f;
         if (Vector3.Dot(dir, transform.right) < 0.0f)
         {
             rotDir = -1.0f;
-        }//왼쪽 클릭 했는지 확인
+        }
 
         while (!Mathf.Approximately(angle, 0.0f))
         {
@@ -88,7 +86,7 @@ public class MoveMent : CharProperty
             playTime += Time.deltaTime;
             Vector3 dir = target.position - transform.position;
             float dist = dir.magnitude - battleStat.AttackRange;
-            if (dist < 0.2f) dist = 0.0f;
+            if (dist < 0.1f) dist = 0.0f;
             dir.Normalize();
             
             float delta = moveSpeed * Time.deltaTime;

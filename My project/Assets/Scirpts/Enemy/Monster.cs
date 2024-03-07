@@ -65,7 +65,7 @@ public class Monster : AIMoveMent
     }
     public override void OnDamage(float dmg, Vector3 attackVec, float knockBackDist, bool isDown)
     {
-        ////curHP -= dmg;
+        
         if (myTarget == null) myTarget = myPerception.myTarget;
         // GameManager.Inst.inGameManager.myPlayer.transform;
         ChangeState(State.Battle);
