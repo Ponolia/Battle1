@@ -33,7 +33,7 @@ public class MoveMent : CharProperty
        // dir.y = 0.0f;
         dir.Normalize();
 
-         StartCoroutine(Rotating(dir));
+        StartCoroutine(Rotating(dir));
         while (dist > 0.0f)
         {
             if (!myAnim.GetBool("IsAttack"))
@@ -79,6 +79,8 @@ public class MoveMent : CharProperty
 
     IEnumerator Attacking(Transform target)
     {
+        bool attacking = false;
+        playTime = battleStat.AttackDelay;
         ILive live = target.GetComponent<ILive>();
         while (target != null)
         {
@@ -91,7 +93,7 @@ public class MoveMent : CharProperty
             
             float delta = moveSpeed * Time.deltaTime;
             
-            if (!Mathf.Approximately(dist, 0.0f))
+            if (!attacking && !Mathf.Approximately(dist, 0.0f))
             {
                 myAnim.SetBool("IsMove", true);
                 if (delta > dist) delta = dist;
@@ -99,14 +101,20 @@ public class MoveMent : CharProperty
                 {
                     transform.Translate(dir * delta, Space.World);
                 }
+                
             }
             else
             {
-                myAnim.SetBool("IsMove", false);
-                if (playTime >= battleStat.AttackDelay)
+                attacking = true;
+                if (dist > 0.5f) attacking = false;
+                else
                 {
-                    playTime = 0.0f;
-                    myAnim.SetTrigger("Attack");
+                    myAnim.SetBool("IsMove", false);
+                    if (playTime >= battleStat.AttackDelay)
+                    {
+                        playTime = 0.0f;
+                        myAnim.SetTrigger("Attack");
+                    }
                 }
             }
 

@@ -86,19 +86,26 @@ public class Monster : AIMoveMent
 
     void OnEnable()
     {
-        OnReset();
-    }
-
-    public void OnReset()
-    {
         Initialize();
         GameObject res = Resources.Load<GameObject>("UI\\EnemyHpBar");
         hpBarObj = Instantiate(Resources.Load("UI\\EnemyHpBar") as GameObject,
-            GameObject.Find("DynamicCanvas").transform.GetChild(1));
+            GameObject.Find("DynamicCanvas").transform.GetChild(0));
         myHpBar = hpBarObj.GetComponent<Slider>();
         hpBarObj.GetComponent<EnemyHPBar>().SetTarget(transform);
         StartCoroutine(StartDelaying(2.0f));
+       // OnReset();
     }
+
+    //public void OnReset()
+    //{
+    //    Initialize();
+    //    GameObject res = Resources.Load<GameObject>("UI\\EnemyHpBar");
+    //    hpBarObj = Instantiate(Resources.Load("UI\\EnemyHpBar") as GameObject,
+    //        GameObject.Find("DynamicCanvas").transform.GetChild(0));
+    //    myHpBar = hpBarObj.GetComponent<Slider>();
+    //    hpBarObj.GetComponent<EnemyHPBar>().SetTarget(transform);
+    //    StartCoroutine(StartDelaying(2.0f));
+    //}
 
     IEnumerator StartDelaying(float t)
     {
@@ -155,7 +162,7 @@ public class Monster : AIMoveMent
         transform.position = startPos;
         myCol.enabled = true;
         myPerception.gameObject.SetActive(false);
-       myState = State.Normal;
+        myState = State.Normal;
         ChangeState(State.Create);
     }
 }

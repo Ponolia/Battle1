@@ -80,6 +80,7 @@ public class PlayerBattleSystem : BattleSystem
             case SkillKey.QSkill:
                 UseSkill(QSkillInfo);
                 break;
+
             case SkillKey.WSkill:
                 UseSkill(WSkillInfo);
                 break;
@@ -105,7 +106,7 @@ public class PlayerBattleSystem : BattleSystem
             return;
         }
 
-        usingSkill = skillInfo;
+         usingSkill = skillInfo;
 
         if (skillInfo.skill.IsAreaSelect)
         {
@@ -191,7 +192,7 @@ public class PlayerBattleSystem : BattleSystem
     }
     public void OnSkillAttack()
     {
-        if (usingSkill != null)
+         if (usingSkill != null)
         {
             //usingSkill.SkillAttack(curAttackPoint, transform, enemyMask);
             StartCoroutine(SkillAttackCoroutine(usingSkill));
@@ -214,8 +215,7 @@ public class PlayerBattleSystem : BattleSystem
             {
                 //Game Over
                 PlayerDead();
-                GameManager.Inst.GameOver();
-                
+                GameManager.Inst.GameOver();    
             }
         
     }
