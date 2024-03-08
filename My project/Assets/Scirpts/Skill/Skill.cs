@@ -62,7 +62,7 @@ public class Skill : ScriptableObject
     public void SwordSkill_2(float dmg, Transform transform, LayerMask enemyMask)
     {
         BattleManager.AttackDirCircle(transform.position + transform.forward, 3.0f,
-            enemyMask, dmg, transform.forward, false, KnockackDist);
+            enemyMask, dmg, transform.up, false, KnockackDist);
     }
     public  void SwordSkill_3(float dmg, Transform transform, LayerMask enemyMask)
     {

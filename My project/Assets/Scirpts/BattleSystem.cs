@@ -83,21 +83,22 @@ public class BattleSystem : MoveMent, IDamage, ILive
     protected virtual void OnCharStagger()
     {
        // StopMove();
-       myAnim.SetTrigger("Hit");
-        myAnim.Play("Hit", -1, 0f);
-
-    }
-    protected virtual void OnDead()
-    {
+        myAnim.SetTrigger("Hit");
+        myAnim.Play("GetHit", -1, 0f);
 
     }
     protected virtual void OnCharDown()
     {
 
     }
+    protected virtual void OnDead()
+    {
+
+    }
+   
     void KnockBack(Vector3 attackVec, float knockBackDist)
     {
-        transform.forward = -attackVec;
+        transform.position += attackVec;
         //transform.Translate(attackVec * knockBackDist, Space.World);
         StartCoroutine(Moving(attackVec * knockBackDist));
     }
@@ -105,10 +106,10 @@ public class BattleSystem : MoveMent, IDamage, ILive
     {
         float dist = dir.magnitude;
         dir.Normalize();
-
+        
         while (dist > 0.0f)
         {
-            float delta = Time.deltaTime * 30.0f;   //�˹� �ӵ� �ϴ� ����. 30.0f
+            float delta = Time.deltaTime * 30.0f;   
             if (delta > dist) delta = dist;
             dist -= delta;
 

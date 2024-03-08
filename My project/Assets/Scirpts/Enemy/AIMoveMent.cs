@@ -80,19 +80,19 @@ public class AIMoveMent : BattleSystem
             yield return null;
         }
     }
-    void RndAttack()
-    {
-        int rndValue = Random.Range(1, 5);
-        switch (rndValue)
-        {
-            case 1:
-                myAnim.SetTrigger("Attack");
-                break;
-            case 2:
-                myAnim.SetTrigger("Attack2");
-                break;
-            default:
-                break;
-        }
-    }
+    //void RndAttack()
+    //{
+    //    int rndValue = Random.Range(1, 5);
+    //    switch (rndValue)
+    //    {
+    //        case 1:
+    //            myAnim.SetTrigger("Attack");
+    //            break;
+    //        case 2:
+    //            myAnim.SetTrigger("Attack2");
+    //            break;
+    //        default:
+    //            break;
+    //    }
+    //}
 }

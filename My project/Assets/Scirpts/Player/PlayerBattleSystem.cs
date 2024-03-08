@@ -105,9 +105,7 @@ public class PlayerBattleSystem : BattleSystem
             //Debug.Log($"해당 스킬이 쿨타임 중 입니다. 남은 쿨타임 : {skillInfo.curSkillCool}");
             return;
         }
-
-         usingSkill = skillInfo;
-
+        usingSkill = skillInfo;
         if (skillInfo.skill.IsAreaSelect)
         {
             //skill.AreaPrefab 생성
@@ -170,12 +168,14 @@ public class PlayerBattleSystem : BattleSystem
         skillInfo.curSkillCool = skillInfo.skill.CoolTime;
 
         GameManager.Inst.UiManager.mySkillUI.CoolTimeSkill(skillInfo);
-
+        
         while (skillInfo.curSkillCool >= 0.0f)
         {
             skillInfo.curSkillCool -= Time.deltaTime;
             yield return null;
         }
+        Debug.Log(skillInfo.curSkillCool);
+        
     }
 
     public void OnSkillEffectStart()

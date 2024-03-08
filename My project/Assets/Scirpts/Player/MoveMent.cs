@@ -11,19 +11,33 @@ public class MoveMent : CharProperty
     public LayerMask skillClickMask;
     public LayerMask virtualGroundMask;
 
-
+    Coroutine coMove = null;
+    Coroutine coRot = null;
+    Coroutine coAttack = null;
     private void Update()
     {
 
     }
+
+    void StopTargetCoroutine(Coroutine target)
+    {
+        if(target != null)
+        {
+            StopCoroutine(target);
+            target = null;
+        }
+    }
+
     public void MovetoPos(Vector3 pos)
     {
         MovetoPos(pos, null);
     }
     public void MovetoPos(Vector3 pos, UnityAction done)
     {
-        StopAllCoroutines();
-        StartCoroutine(MovingPos(pos, done));
+        StopTargetCoroutine(coMove);
+        StopTargetCoroutine(coRot);
+        StopTargetCoroutine(coAttack);
+        coMove = StartCoroutine(MovingPos(pos, done));
     }
     protected IEnumerator MovingPos(Vector3 pos, UnityAction done)
     {
@@ -33,7 +47,8 @@ public class MoveMent : CharProperty
        // dir.y = 0.0f;
         dir.Normalize();
 
-        StartCoroutine(Rotating(dir));
+        StopTargetCoroutine(coRot);
+        coRot = StartCoroutine(Rotating(dir));
         while (dist > 0.0f)
         {
             if (!myAnim.GetBool("IsAttack"))
@@ -73,8 +88,11 @@ public class MoveMent : CharProperty
     }
     protected void AttackTarget(Transform target)
     {
-        StopAllCoroutines();
-        StartCoroutine(Attacking(target));
+        //StopAllCoroutines();
+        StopTargetCoroutine(coMove);
+        StopTargetCoroutine(coRot);
+        StopTargetCoroutine(coAttack);
+        coAttack = StartCoroutine(Attacking(target));
     }
 
     IEnumerator Attacking(Transform target)
